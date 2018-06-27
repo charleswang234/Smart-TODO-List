@@ -12,12 +12,12 @@ exports.seed = function(knex, Promise) {
 
   function insertUsers(){
     return knex('users').insert([
-        {id: 1, 'first_name': 'Alice', 'last_name': 'Smith', 'email':'example@a.com', 'password':'test1'},
-        {id: 2, 'first_name': 'Bob', 'last_name': 'Doe', 'email':'example@b.com', 'password':'test2'},
-        {id: 3, 'first_name': 'Charlie', 'last_name': 'Brown', 'email':'example@c.com', 'password':'test3'}
+        { 'first_name': 'Alice', 'last_name': 'Smith', 'email':'example@a.com', 'password':'test1'},
+        {'first_name': 'Bob', 'last_name': 'Doe', 'email':'example@b.com', 'password':'test2'},
+        {'first_name': 'Charlie', 'last_name': 'Brown', 'email':'example@c.com', 'password':'test3'}
       ]).returning('*');
     };
-  
+
   function insertCategories() {
     return knex('categories').insert([
       {id: 1, 'category': 'Buy'},
@@ -39,5 +39,5 @@ exports.seed = function(knex, Promise) {
     .then(deleteCategories)
     .then(deleteUsers)
     .then(users => insertUsers(users))
-    
+
 };

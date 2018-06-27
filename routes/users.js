@@ -45,24 +45,87 @@ module.exports = (knex) => {
     res.render("login");
   });
 
+
   // logging in
   router.post("/login", (req, res) => {
-    res.redirect("/home/:id");
+
+    knex('users')
+      .where({ email: req.body.email } )
+      .andWhere({password: req.body.password})
+      .select('*')
+      .then(function(result){
+        if (result.length === 0 ) {
+          res.status(400).json({ error: 'Invalid email or password.'})
+          return;
+        }
+        res.redirect("/home/:id");
+        //create cookie session
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+
+
   });
 
   // registration page
+
+
+
+
+
   router.get("/register", (req, res) => {
     res.render("register");
   });
 
   router.post("/register", (req, res) => {
-    res.redirect("/home/:id");
+    knex('users')
+    .select('*')
+    .where({ email: req.body.email })
+    .then( function(result){
+      console.log(result)
+
+      if (result.length === 0 ){
+        knex('users')
+          .insert({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          password: req.body.password,
+          email: req.body.email
+          })
+          .then(function()
+          {
+            console.log('inserted')
+          })
+          .catch(function(error) {
+            console.log(error);
+          })
+          res.redirect("/home/:id");
+          return;
+        //create cookie session
+
+      }
+
+        //error email already exists
+        res.status(400).json({ error: 'Invalid request: email already exists.'})
+        console.log("error! email exists")
+        return;
+    })
+
+
   });
 
   // user clicks the logout submit
   router.post("/logout", (req, res) => {
     res.redirect("/login");
   });
+
+    //make sure front end event checks for empty entry for forms
+
+
+
+
+
 
   return router;
 }
