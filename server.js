@@ -1,6 +1,6 @@
 "use strict";
 
-require('dotenv').config();
+require('dotenv').config(); // loads environment variables from .env file into process.env
 
 const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
