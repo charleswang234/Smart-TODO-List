@@ -7,30 +7,46 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <!-- bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    
   </head>
 
   <body>
     <nav>
-      <h4>Smart TODO List</h4>
-      <img src="" id="user_avatar"/>
-      <h5>User Name</h5>
-      <form>
-        <input type="text" name="task_entry" placeholder="What do you want to do?">
-        <input type="submit" value="Add">
-      </form>
-      <button>Settings</button>
-      <button>Logout</button>
+      <div class="navbar">
+        <div class="container">
+          <div class="navbar-header">
+            <h4>Smart TODO List</h4>
+            <img src="" id="user_avatar"/>
+            <h5>User Name</h5>
+            <form>
+              <input type="text" name="task_entry" placeholder="What do you want to do?">
+              <input type="submit" value="Add">
+            </form>
+            <button>Settings</button>
+            <button>Logout</button>
+          </div> 
+        </div> 
+      </div>  
     </nav>
 
     <span class="date">Wednesday. June 27, 2018</span>
     <span class="weather">21.C</span>
     <section>
-      <div>Eat</div>
-      <div>Read</div>
-      <div>Watch</div>
-      <div>Buy</div>
+      <div class="row">
+        <div class="col-3">Eat</div>
+        <div class="col-3">Read</div>
+        <div class="col-3">Watch</div>
+        <div class="col-3">Buy</div>
+      </div>
     </section>
 
   </body>
