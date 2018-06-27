@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.table('milestones', function(table) {
+    knex.schema.table('users', function(table) {
       table.dropColumn('first-name');
       table.dropColumn('last-name');
       table.dropColumn('email');
