@@ -45,9 +45,18 @@ module.exports = (knex) => {
     res.render("login");
   });
 
+  // logging in
+  router.post("/login", (req, res) => {
+    res.redirect("/home/:id");
+  });
+
   // registration page
   router.get("/register", (req, res) => {
     res.render("register");
+  });
+
+  router.post("/register", (req, res) => {
+    res.redirect("/home/:id");
   });
 
   // user clicks the logout submit
