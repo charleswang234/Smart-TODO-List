@@ -1,14 +1,18 @@
 "use strict"
-
 const express = require('express');
 const router = express.Router();
-
 module.exports = (knex) => {
   router.get("/", (req, res) => {
+    // knex.select('*')
+    // .from('tasks')
+    // .then((results) => {
+    //   res.json(results);
+    // })
     if(req.session.user_id) {
-     knex
-     .select("*")
-     .from("categories")
+     knex("tasks")
+     .join("categories", "tasks.category_id", "=", "categories.id")
+     .select("tasks.id", "tasks.user_id", "tasks.activity", "categories.category")
+     .orderBy("tasks.id")
      .then((results) => {
       res.json(results);
     })
@@ -17,6 +21,8 @@ module.exports = (knex) => {
     });
      return;
    }
- });
+   res.redirect("/login");
+ }
+ );
   return router;
 }

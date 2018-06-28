@@ -16,8 +16,7 @@
   <!-- APP JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
+  
   <!-- bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -43,7 +42,7 @@
             <form class="form-inline" action="/home/" method="POST">
               <!-- this is where activity is writen in -->
               <input class="form-control mr-sm-2" type="search" placeholder="What do you want to do?" aria-label="Do">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Do!</button>
+              <button class="btn btn-outline-success my-2 my-sm-0" id="addButton" type="submit">Do!</button>
             </form>
           </nav>
         </li>
@@ -79,25 +78,45 @@
         <div class="col-3">
           <div class="column">
             <h5 class="activity" id="eat">Eat</h5>
-            <p class="content">Content</p>
+            <p class="contentEat">Content
+              <span>
+                <i class="fas fa-clipboard-check"></i>
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </p>
           </div>
         </div>
         <div class="col-3">
           <div class="column">
             <h5 class="activity" id="read">Read</h5>
-            <p class="content">Content</p>
+            <p class="contentRead">Content
+                <span>
+                    <i class="fas fa-clipboard-check"></i>
+                    <i class="fas fa-trash-alt"></i>
+                  </span>
+            </p>
           </div>
         </div>
         <div class="col-3">
           <div class="column">
             <h5 class="activity" id="buy">Buy</h5>
-            <p class="content">Content</p>
+            <p class="contentBuy">Content
+                <span>
+                    <i class="fas fa-clipboard-check"></i>
+                    <i class="fas fa-trash-alt"></i>
+                  </span>
+            </p>
           </div>
         </div>
         <div class="col-3">
           <div class="column">
             <h5 class="activity" id="watch">Watch</h5>
-            <p class="content">Content</p>
+            <p class="contentWatch">Content
+                <span>
+                    <i class="fas fa-clipboard-check"></i>
+                    <i class="fas fa-trash-alt"></i>
+                  </span>
+            </p>
           </div>
 <!-- =======
   <section id= "activity-container">
