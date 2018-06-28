@@ -72,7 +72,12 @@
     </nav>
 
     <section>
-      <span class="date"></span>
+      <span id="date">
+        <script>
+        var d = moment(new Date()).format('dddd, MMMM Do YYYY');
+        document.getElementById("date").innerHTML = d;
+        </script>
+      </span>
       <span class="weather">21.C</span>
       <div class="row">
         <div class="col-3">
