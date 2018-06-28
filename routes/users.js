@@ -20,7 +20,7 @@ router.get("/home", (req, res) => {
     res.render("index")
     return;
   }
-  res.redirect("login");
+  res.redirect("/login");
     // knex
     //   .select("*")
     //   .from("users")
@@ -83,6 +83,10 @@ router.post("/home", (req, res) => {
 
   // registration page
   router.get("/register", (req, res) => {
+    if(req.session.user_id) {
+      res.redirect("/home");
+      return;
+    }
     res.render("register");
   });
 
