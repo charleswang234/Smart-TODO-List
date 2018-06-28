@@ -64,18 +64,27 @@ router.post("/home", (req, res) => {
 
   // logging in
   router.post("/login", (req, res) => {
+
     knex('users')
     .where({ email: req.body.email } )
-    .andWhere({password: req.body.password})
     .select('*')
     .then(function(result){
-      if (result.length === 0 ) {
+      console.log(result)
+      if (result.length === 0 ){
         res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
-      req.session.user_id = result[0].id
-      res.redirect("/home");
+      if (bcrypt.compareSync(req.body.password, result[0].password)) {
+
+        req.session.user_id = result[0].id
+        res.redirect("/home");
+        return;
         //create cookie session
+      }
+
+      res.status(400).json({ error: 'Invalid email or password.'});
+      return;
+
       })
     .catch(function(error) {
       console.log(error);
