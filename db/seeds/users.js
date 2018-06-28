@@ -24,7 +24,7 @@ exports.seed = function(knex, Promise) {
       {id: 2, 'category': 'Read'},
       {id: 3, 'category': 'Watch'},
       {id: 4, 'category': 'Eat'}
-    ]);
+    ]).returning('*');
   }
 
   function insertTasks(users, categories) {
@@ -38,6 +38,14 @@ exports.seed = function(knex, Promise) {
   return deleteTasks()
     .then(deleteCategories)
     .then(deleteUsers)
-    .then(users => insertUsers(users))
-
+    .then(insertUsers)
+    .then(users => {
+      return insertCategories().then(categories => {
+        return insertTasks(users, categories);
+      })
+    })
+    // .then(insertCategories)
+    // .then((users, categories) => {
+    //   insertTasks(users, categories);
+    // })
 };
