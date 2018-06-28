@@ -8,7 +8,7 @@ module.exports = (knex) => {
     if(req.session.user_id) {
      knex
      .select("*")
-     .from("users")
+     .from("categories")
      .then((results) => {
       res.json(results);
     })

@@ -12,14 +12,16 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+  <!-- APP JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
- 
+
   <!-- bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  
+
   <!-- momentjs -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
 </head>
@@ -47,56 +49,74 @@
         </li>
         <li class="nav-item dropdown">
           <a class="fas fa-bars" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon">
 
-                  </span>
-              </button>
+              </span>
+            </button>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#">
               <form action="/logout" method="POST">
-              <input class="rightbutton" type="submit" value="Logout">
-            </form>
-          </a>
+                <input class="rightbutton" type="submit" value="Logout">
+              </form>
+            </a>
             <!-- these will have to be forms to have POST methods -->
             <a class="dropdown-item" href="#">
               <form action="/home/edit" method="GET">
-              <input class="rightbutton" type="submit" value="Edit Profile">
-            </a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+                <input class="rightbutton" type="submit" value="Edit Profile">
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-  <section>
-  <span class="date">Wednesday. June 27, 2018</span>
-  <span class="weather">21.C</span>
+    <section>
+      <span class="date">Wednesday. June 27, 2018</span>
+      <span class="weather">21.C</span>
+      <div class="row">
+        <div class="col-3">
+          <div class="column">
+            <h5 class="activity" id="eat">Eat</h5>
+            <p class="content">Content</p>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="column">
+            <h5 class="activity" id="read">Read</h5>
+            <p class="content">Content</p>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="column">
+            <h5 class="activity" id="buy">Buy</h5>
+            <p class="content">Content</p>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="column">
+            <h5 class="activity" id="watch">Watch</h5>
+            <p class="content">Content</p>
+          </div>
+<!-- =======
+  <section id= "activity-container">
     <div class="row">
-      <div class="col-3">
-        <div class="column">
-          <h5 class="activity" id="eat">Eat</h5>
-          <p class="content">Content</p>
-        </div>
+      <div class="col-3 eat">
+        <h3>eat</h3>
+        <p>fries</p>
+        <p>cookies</p>
+        <p>lasagna</p>
       </div>
-      <div class="col-3">
-        <div class="column">  
-          <h5 class="activity" id="read">Read</h5>
-          <p class="content">Content</p>
-        </div>
+      <div class="col-3 read">
+        <h3>read</h3>
       </div>
-      <div class="col-3">
-        <div class="column">
-          <h5 class="activity" id="buy">Buy</h5>
-          <p class="content">Content</p>
-        </div>
+      <div class="col-3 watch">
+        <h3>watch</h3>
       </div>
-      <div class="col-3">
-        <div class="column">
-          <h5 class="activity" id="watch">Watch</h5>
-          <p class="content">Content</p>
-        </div>
+      <div class="col-3 buy">
+        <h3>buy</h3>
+        >>>>>>> jquery-items -->
       </div>
     </div>
   </section>
