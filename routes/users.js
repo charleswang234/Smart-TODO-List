@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router  = express.Router();
+const bcrypt  = require('bcryptjs')
 
 module.exports = (knex) => {
 
@@ -70,18 +71,27 @@ router.post("/home", (req, res) => {
 
   // logging in
   router.post("/login", (req, res) => {
+
     knex('users')
     .where({ email: req.body.email } )
-    .andWhere({password: req.body.password})
     .select('*')
     .then(function(result){
-      if (result.length === 0 ) {
+      console.log(result)
+      if (result.length === 0 ){
         res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
-      req.session.user_id = result[0].id;
-      res.redirect("/home");
+
+      if (bcrypt.compareSync(req.body.password, result[0].password)) {
         //create cookie session
+        req.session.user_id = result[0].id
+        res.redirect("/home");
+        return;
+      }
+
+      res.status(400).json({ error: 'Invalid email or password.'});
+      return;
+
       })
     .catch(function(error) {
       console.log(error);
@@ -97,43 +107,47 @@ router.post("/home", (req, res) => {
     res.render("register");
   });
 
+  // hashing function
+  const hashing = (password) =>{
+    return bcrypt.hashSync(password, 10)
+  }
+
+
   // submitting a registration
   router.post("/register", (req, res) => {
     knex('users')
     .select('*')
     .where({ email: req.body.email })
     .then( function(result){
-      console.log(result)
 
       if (result.length === 0 ){
+
         knex('users')
         .insert({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
-          password: req.body.password,
+          password: hashing(req.body.password),
           email: req.body.email
         })
-        .then(function()
+        .returning('id')
+        .then(function(id)
         {
-          console.log('inserted')
+          req.session.user_id = id[0];
+          res.redirect("/home");
+          console.log(id[0]);
+
         })
         .catch(function(error) {
           console.log(error);
         })
-        req.session.user_id = result[0].id; // THIS IS NOT WORKING
-        res.redirect("/home");
+
         return;
-        //create cookie session
-
       }
-
         //error email already exists
         res.status(400).json({ error: 'Invalid request: email already exists.'})
         console.log("error! email exists")
         return;
       })
-
-
   });
 
   // user clicks the logout submit
