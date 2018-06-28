@@ -6,7 +6,11 @@ const router  = express.Router();
 module.exports = (knex) => {
 
   router.get("/home", (req, res) => {
-    res.render("index");                    // modify later to redirect to /home/:id if logged in and
+    if(req.session.user_id){
+      res.render("index")
+      return
+    }
+    res.redirect("login");                    // modify later to redirect to /home/:id if logged in and
                                             //  redirects to login page  if not logged in
     // knex
     //   .select("*")
@@ -18,7 +22,11 @@ module.exports = (knex) => {
 
    // sends you to the edit page
    router.get("/home/:id/edit", (req, res) => {
+    if(req.session.user_id){
       res.render("edit");
+      return
+    }
+    res.redirect("/login");
    });
 
   // home page that allows logged in users to add and remove their items on the to do list
@@ -42,13 +50,16 @@ module.exports = (knex) => {
 
   // login page
   router.get("/login", (req, res) => {
+    if(req.session.user_id){
+      res.redirect("/home");
+      return;
+    }
     res.render("login");
   });
 
 
   // logging in
   router.post("/login", (req, res) => {
-
     knex('users')
       .where({ email: req.body.email } )
       .andWhere({password: req.body.password})
@@ -58,6 +69,7 @@ module.exports = (knex) => {
           res.status(400).json({ error: 'Invalid email or password.'})
           return;
         }
+        req.session.user_id = result[0].id
         res.redirect("/home/:id");
         //create cookie session
       })
@@ -100,6 +112,7 @@ module.exports = (knex) => {
           .catch(function(error) {
             console.log(error);
           })
+          req.session.user_id = result[0].id
           res.redirect("/home/:id");
           return;
         //create cookie session
@@ -117,6 +130,7 @@ module.exports = (knex) => {
 
   // user clicks the logout submit
   router.post("/logout", (req, res) => {
+    req.session = null;
     res.redirect("/login");
   });
 
