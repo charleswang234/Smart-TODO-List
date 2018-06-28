@@ -17,6 +17,13 @@ module.exports = (knex) => {
 // home page that allows logged in users to add and remove their items on the to do list
 router.get("/home", (req, res) => {
   if(req.session.user_id) {
+
+    // knex
+    //   .select("*")
+    //   .from("users")
+    //   .then((results) => {
+    //     res.json(results);
+    // });
     res.render("index")
     return;
   }
@@ -72,7 +79,7 @@ router.post("/home", (req, res) => {
         res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
-      req.session.user_id = result[0].id
+      req.session.user_id = result[0].id;
       res.redirect("/home");
         //create cookie session
       })
