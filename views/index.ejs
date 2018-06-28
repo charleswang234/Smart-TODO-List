@@ -15,72 +15,89 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ 
+  <!-- bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  
+  <!-- momentjs -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
 </head>
 
 <body>
-  <nav>
-    <!-- <h4>Smart TODO List</h4>  -->
-    <!-- <img src="" id="user_avatar"/>
-    <h5>User Name</h5>
-    <form action="/home" method="POST"> <!-- change later -->
-      <!-- <input type="text" name="task_entry" placeholder="What do you want to do?">
-      <input type="submit" value="Add">
-    </form>
-    <form action="/home/edit" method="GET">
-      <input type="submit" value="Edit Profile">
-    </form>
-    <form action="/logout" method="POST">
-      <input type="submit" value="Logout">
-    </form>
-  </nav> -->
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Logo</a>
-      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link user" href="#">User Name <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <nav class="navbar navbar-light bg-light">
-              <form class="form-inline">
-                <!-- this is where activity is writen in -->
-                <input class="form-control mr-sm-2" type="search" placeholder="What do you want to do?" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </nav>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="fas fa-bars" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
+    <a class="navbar-brand" href="#"><i class="fab fa-nintendo-switch"></i>
+    </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link user" href="#">Hi, Lighthouse <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <nav class="navbar navbar-light bg-light">
+            <form class="form-inline" action="/home/" method="POST">
+              <!-- this is where activity is writen in -->
+              <input class="form-control mr-sm-2" type="search" placeholder="What do you want to do?" aria-label="Do">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Do!</button>
+            </form>
+          </nav>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="fas fa-bars" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
 
-                    </span>
-                </button>
+                  </span>
+              </button>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">
+              <form action="/logout" method="POST">
+              <input class="rightbutton" type="submit" value="Logout">
+            </form>
+          </a>
+            <!-- these will have to be forms to have POST methods -->
+            <a class="dropdown-item" href="#">
+              <form action="/home/edit" method="GET">
+              <input class="rightbutton" type="submit" value="Edit Profile">
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Logout</a>
-              <!-- these will have to be forms to have POST methods -->
-              <a class="dropdown-item" href="#">Edit Profile</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
+  <section>
   <span class="date">Wednesday. June 27, 2018</span>
   <span class="weather">21.C</span>
-  <section>
     <div class="row">
-      <div class="col-3">Eat</div>
-      <div class="col-3">Read</div>
-      <div class="col-3">Watch</div>
-      <div class="col-3">Buy</div>
+      <div class="col-3">
+        <div class="column">
+          <h5 class="activity" id="eat">Eat</h5>
+          <p class="content">Content</p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="column">  
+          <h5 class="activity" id="read">Read</h5>
+          <p class="content">Content</p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="column">
+          <h5 class="activity" id="buy">Buy</h5>
+          <p class="content">Content</p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="column">
+          <h5 class="activity" id="watch">Watch</h5>
+          <p class="content">Content</p>
+        </div>
+      </div>
     </div>
   </section>
 
