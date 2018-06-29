@@ -42,9 +42,11 @@ module.exports = (knex) => {
       })
     .then(function(){
       console.log("insert done")
+      res.status(201).send();
+      // res.redirect("/home")
     })
     }
-  // res.redirect("/home")
+
   })
 
   // res.redirect("/login");

@@ -4,6 +4,19 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt  = require('bcryptjs')
 
+
+// checks if a string is empty
+function emptyString(string) {
+  return string === "";
+}
+
+
+// determines whether or not the passwords are equal
+function passwordEqual(password, verify_password) {
+  return password === verify_password;
+}
+
+
 module.exports = (knex) => {
 
  router.get("/", (req, res) => {
@@ -57,6 +70,56 @@ router.post("/home", (req, res) => {
 
 
 
+   // changing user data
+   router.post("/home/edit", (req, res) => {
+
+    // If not data is going to be changed
+    if (emptyString(req.body.first_name) && emptyString(req.body.last_name) &&
+      emptyString(req.body.password) && emptyString(req.body.verify_password)) {
+      // res.redirect("/home/edit");
+    res.redirect("/home/edit");
+    return;
+  }
+  knex('users')
+  .where({ id: req.session.user_id})
+  .select('*')
+  .then(function(result) {
+    const newUserData = {};
+    // if old password is incorrect, responds with an error
+    if (!bcrypt.compareSync(req.body.old_password, result[0].password)) {
+      console.log(result);
+      res.status(400).json({ error: 'incorrect old password'});
+      return;
+    } else {
+      if (! passwordEqual(req.body.password, req.body.verify_password)) {
+        res.status(400).json({ error: "new passwords don't match"});
+      } else if (!emptyString(req.body.password)) {
+        newUserData.password = hashing(req.body.password);
+      }
+      if (req.body.first_name){
+        newUserData.first_name = req.body.first_name;
+      }
+      if (req.body.last_name) {
+        newUserData.last_name = req.body.last_name;
+      }
+      knex("users")
+      .where({ id: req.session.user_id})
+      .update(newUserData)
+      .then((result) => {
+        console.log(result);
+      })
+
+      res.redirect("/home");
+      return;
+    }
+
+  });
+    // There is data that wants to be changed but password is not equal
+    // if (emptyString(req.body_))
+
+  });
+
+
 
 
   // login page
@@ -92,7 +155,7 @@ router.post("/home", (req, res) => {
       res.status(400).json({ error: 'Invalid email or password.'});
       return;
 
-      })
+    })
     .catch(function(error) {
       console.log(error);
     })

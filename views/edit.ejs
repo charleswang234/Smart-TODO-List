@@ -19,24 +19,28 @@
     <h1>Smart TODO List</h1>
   </header>
   <section>
-    <form>
+    <form action="/home/edit" method="POST">
       <div>
-        <label for="FirstName">First Name: </label>
-        <input type="text" name= "FirstName" placeholder="charles"/>
+        <label for="first_name">First Name: </label>
+        <input type="text" name= "first_name" placeholder="charles"/>
       </div>
       <div>
-        <label for="LastName">Last Name: </label>
-        <input type="text" name= "LastName" placeholder="Wang"/>
+        <label for="last_name">Last Name: </label>
+        <input type="text" name= "last_name" placeholder="Wang"/>
       </div>
       <div>
-        <label for="Password">New password: </label>
-        <input type="password" name= "Password"/>
+        <label for="password">New password: </label>
+        <input type="password" name= "password"/>
       </div>
-
-      <p> edit page </p>
-      <p> First name </p>
-      <p> Last name </p>
-      <p> password </p>
+      <div>
+        <label for="verify_password" name= "verify_password">Re-enter New Password: </label>
+        <input  type = "password" name= "verify_password"/>
+      </div>
+      <div>
+        <label for="old_password" name= "old_password">Enter Old Password: </label>
+        <input  type = "password" name= "old_password"/>
+      </div>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">submit</button>
     </form>
   </section>
 
