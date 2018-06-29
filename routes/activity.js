@@ -22,6 +22,8 @@ module.exports = (knex) => {
      return;
    }
   })
+
+
   router.post("/", function(req, res) {
   console.log("is it here?", req.body.inputActivity)
   console.log("session",req.session.user_id)
@@ -34,18 +36,18 @@ module.exports = (knex) => {
     console.log("inserting?")
     knex("tasks")
     .insert({'activity': req.body.inputActivity,
-            'completed': false, 
-            'user_id': req.session.user_id, 
+            'completed': false,
+            'user_id': req.session.user_id,
             'category_id': 1
       })
     .then(function(){
       console.log("insert done")
     })
     }
-  res.redirect("/home")
+  // res.redirect("/home")
   })
 
   // res.redirect("/login");
-   
+
   return router;
 }

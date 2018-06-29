@@ -4,7 +4,7 @@
 // }
 
 /* Appends a buy activity to index file.
- */
+*/
 function createBuy (input) {
   var $contentBuy = $('<p>').addClass('contentBuy').text(input.activity);
   $('<span>')
@@ -20,7 +20,7 @@ function createBuy (input) {
 }
 
 /* Appends a watch activity to index file.
- */
+*/
 function createWatch (input) {
   var $contentWatch = $('<p>').addClass('contentWatch').text(input.activity);
   $('<span>')
@@ -31,12 +31,12 @@ function createWatch (input) {
 
   $('<i>').addClass('fas fa-trash-alt')
   .appendTo($contentWatch);
-  
+
   return $contentWatch;
 }
 
 /* Appends a read activity to index file.
- */
+*/
 function createRead (input) {
   var $contentRead = $('<p>').addClass('contentRead').text(input.activity);
   $('<span>')
@@ -47,12 +47,12 @@ function createRead (input) {
 
   $('<i>').addClass('fas fa-trash-alt')
   .appendTo($contentRead);
-  
+
   return $contentRead;
 }
 
 /* Appends a eat activity to index file.
- */
+*/
 function createEat (input) {
   var $contentEat = $('<p>').addClass('contentEat').text(input.activity);
   $('<span>')
@@ -63,30 +63,28 @@ function createEat (input) {
 
   $('<i>').addClass('fas fa-trash-alt')
   .appendTo($contentEat);
-  
+
   return $contentEat;
 }
 
 /* Load all activities to the columns
- */
+*/
 function loadActivities () {
   $.ajax({
     url: "/activity",
     type: 'GET',
-   }).then (function (jsonActivities) {
-      $('.contentBuy').empty();
-      $('.contentWatch').empty();
-      $('.contentEat').empty();
-      $('.contentRead').empty();
-      renderActivities(jsonActivities);
-    })
-  };
+  }).then (function (jsonActivities) {
+
+    renderActivities(jsonActivities);
+  })
+};
 
 function newActivity () {
   $('#addButton').on('submit', function (e){
-    let activity = $('inputActivity').val();
-    cosole.log("activity",activity)
     event.preventDefault();
+    let activity = $('.form-control').val();
+    // cosole.log("activity",activity)
+
     if (activity === '') {
       alert('alert');
       return;
@@ -95,10 +93,11 @@ function newActivity () {
       $.ajax({
         url: "/activity",
         type: 'POST',
+        data: $(this).serialize()
       }).then (function (jsonActivities) {
-          $('inputActivity').val('');
-          loadActivities();
-          // $('.contentBuy').prepend(createBuy([{activity}]));          
+        $('inputActivity').val('');
+        loadActivities();
+          // $('.contentBuy').prepend(createBuy([{activity}]));
         })
     };
   })
@@ -129,32 +128,38 @@ function newActivity () {
       // })
       // loadTweets();
       // });
-      
+
 
 
 
 /* Renders the activities and places them to specified columns
- */
+*/
 function renderActivities (activities){
   console.log(activities);
+  $('#eatSection').empty();
+  $('#readSection').empty();
+  $('#buySection').empty();
+  $('#watchSection').empty();
+  console.log('*****************************************************');
   activities.forEach(function (activity){
     if(activity.category === "Buy"){
-      $('.contentBuy').prepend(createBuy(activity))
+      $('#buySection').prepend(createBuy(activity))
     }else if (activity.category === "Watch"){
-        $('.contentWatch').prepend(createWatch(activity))
+      $('#watchSection').prepend(createWatch(activity))
     }else if (activity.category === "Eat"){
-        $('.contentEat').prepend(createEat(activity))
+      $('#eatSection').prepend(createEat(activity))
     }else if (activity.category === "Read"){
-        $('.contentRead').prepend(createRead(activity))
+      $('#readSection').prepend(createRead(activity))
     }
   })
 }
 
 $(document).ready(function() {
+  loadActivities();
   console.log("did it get here?")
   newActivity();
   console.log("test")
-  loadActivities();
+
 })
 
 
