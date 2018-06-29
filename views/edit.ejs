@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
-  <head>
-    <title>Smart TODO List Edit Profile</title>>
-  </head>
-  <body>
-    <header>
-      <h1>Smart TODO List</h1>
-    </header>
-    <section>
-      <p> edit page </p>
-    </section>
+<head>
+  <title>Smart TODO List Edit Profile</title>>
 
-  </body>
+  <!-- bootstrap stylesheet -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+  <!-- uses jquery js -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+  <!-- uses editProfile script -->
+  <script type="text/javascript" src="/scripts/editProfile.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Smart TODO List</h1>
+  </header>
+  <section>
+    <form>
+      <div>
+        <label for="FirstName">First Name: </label>
+        <input type="text" name= "FirstName" placeholder="charles"/>
+      </div>
+      <div>
+        <label for="LastName">Last Name: </label>
+        <input type="text" name= "LastName" placeholder="Wang"/>
+      </div>
+      <div>
+        <label for="Password">New password: </label>
+        <input type="password" name= "Password"/>
+      </div>
+
+      <p> edit page </p>
+      <p> First name </p>
+      <p> Last name </p>
+      <p> password </p>
+    </form>
+  </section>
+
+</body>
 </html>
