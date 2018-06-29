@@ -21,8 +21,31 @@ module.exports = (knex) => {
     });
      return;
    }
-   res.redirect("/login");
- }
- );
+  })
+  router.post("/", function(req, res) {
+  console.log("is it here?", req.body.inputActivity)
+  console.log("session",req.session.user_id)
+  // let activity = ('inputActivity').val();
+  if (!req.body.inputActivity) {
+    res.status(400).json({ error: 'invalid request: no data in POST body'});
+    return;
+  }
+  else{
+    console.log("inserting?")
+    knex("tasks")
+    .insert({'activity': req.body.inputActivity,
+            'completed': false, 
+            'user_id': req.session.user_id, 
+            'category_id': 1
+      })
+    .then(function(){
+      console.log("insert done")
+    })
+    }
+  res.redirect("/home")
+  })
+
+  // res.redirect("/login");
+   
   return router;
 }
