@@ -1,6 +1,13 @@
 "use strict"
 const express = require('express');
 const router = express.Router();
+
+
+function randomInteger(max) {
+  return Math.floor(Math.random() * Math.floor(max)) + 1;
+}
+
+
 module.exports = (knex) => {
   router.get("/", (req, res) => {
     // knex.select('*')
@@ -36,12 +43,13 @@ module.exports = (knex) => {
     return;
   }
   else{
+    const randomInt = randomInteger(4);
     console.log("inserting?")
     knex("tasks")
     .insert({'activity': req.body.inputActivity,
             'completed': false,
             'user_id': req.session.user_id,
-            'category_id': 1
+            'category_id': randomInt
       })
     .then(function(){
       console.log("insert done")

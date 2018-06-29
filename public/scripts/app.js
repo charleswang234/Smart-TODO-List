@@ -95,7 +95,7 @@ function newActivity () {
         type: 'POST',
         data: $(this).serialize()
       }).then (function (jsonActivities) {
-        $('inputActivity').val('');
+        $('.form-control').val('');
         loadActivities();
           // $('.contentBuy').prepend(createBuy([{activity}]));
         })
