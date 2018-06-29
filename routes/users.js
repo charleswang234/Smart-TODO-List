@@ -30,25 +30,20 @@ module.exports = (knex) => {
 
 // home page that allows logged in users to add and remove their items on the to do list
 router.get("/home", (req, res) => {
-  if(req.session.user_id) {
-
-    // knex
-    //   .select("*")
-    //   .from("users")
-    //   .then((results) => {
-    //     res.json(results);
-    // });
-    res.render("index")
-    return;
+  if(!req.session.user_id) { // user not logged in
+    res.redirect("/login");
+    return
   }
-  res.redirect("/login");
-    // knex
-    //   .select("*")
-    //   .from("users")
-    //   .then((results) => {
-    //     res.json(results);
-    // });
-  });
+
+  knex('users')
+  .where({id: req.session.user_id})
+  .select('first_name')
+  .then((firstName) => {
+    console.log(firstName[0]);
+    res.render("index", firstName[0]);
+    return;
+  })
+});
 
 // adding a new item to to-do list
 router.post("/home", (req, res) => {
@@ -61,11 +56,22 @@ router.post("/home", (req, res) => {
 
    // renders the edit page
    router.get("/home/edit", (req, res) => {
-    if(req.session.user_id) {
-      res.render("edit");
+    if (!req.session.user_id) { // user not logged in
+      res.redirect("/login");
       return;
     }
-    res.redirect("/login");
+    knex('users')
+    .where({id: req.session.user_id})
+    .select('first_name', 'last_name')
+    .then((completeName) => {
+      const name = {}; // selects the first_name and last_name to display in placeholder for edit
+      // console.log(completeName);
+      name.first_name = completeName[0].first_name;
+      name.last_name = completeName[0].last_name;
+      console.log(name);
+      res.render("edit", name);
+    })
+
   });
 
 

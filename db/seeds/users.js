@@ -27,7 +27,7 @@ exports.seed = function(knex, Promise) {
     return knex('tasks').insert([
       {'activity': 'Buy apple', 'completed': false, 'user_id': users[0].id, 'category_id': categories[0].id},
       {'activity': 'Read manga', 'completed': false, 'user_id': users[0].id, 'category_id': categories[1].id},
-      {'activity': 'Read book', 'completed': false, 'user_id': users[1].id, 'category_id': categories[1].id},
+      {'activity': 'Read book', 'completed': false, 'user_id': users[0].id, 'category_id': categories[1].id},
     ]);
   }
   return deleteTasks()
