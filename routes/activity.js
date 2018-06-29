@@ -11,9 +11,12 @@ module.exports = (knex) => {
     if(req.session.user_id) {
      knex("tasks")
      .join("categories", "tasks.category_id", "=", "categories.id")
+     .join("users", "tasks.user_id", "=", "users.id")
+     .where({"users.id": req.session.user_id})
      .select("tasks.id", "tasks.user_id", "tasks.activity", "categories.category")
      .orderBy("tasks.id")
      .then((results) => {
+      // console.log(results);
       res.json(results);
     })
      .catch(function(error) {
