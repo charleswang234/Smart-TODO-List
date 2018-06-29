@@ -17,6 +17,11 @@ function passwordEqual(password, verify_password) {
 }
 
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
 module.exports = (knex) => {
 
  router.get("/", (req, res) => {
@@ -103,10 +108,10 @@ router.post("/home", (req, res) => {
         newUserData.password = hashing(req.body.password);
       }
       if (req.body.first_name){
-        newUserData.first_name = req.body.first_name;
+        newUserData.first_name = capitalizeFirstLetter(req.body.first_name);
       }
       if (req.body.last_name) {
-        newUserData.last_name = req.body.last_name;
+        newUserData.last_name = capitalizeFirstLetter(req.body.last_name);
       }
       knex("users")
       .where({ id: req.session.user_id})
@@ -190,11 +195,12 @@ router.post("/home", (req, res) => {
     .then( function(result){
 
       if (result.length === 0 ){
-
+        const firstName = capitalizeFirstLetter(req.body.first_name);
+        const lastName = capitalizeFirstLetter(req.body.last_name);
         knex('users')
         .insert({
-          first_name: req.body.first_name,
-          last_name: req.body.last_name,
+          first_name: firstName,
+          last_name: lastName,
           password: hashing(req.body.password),
           email: req.body.email
         })
