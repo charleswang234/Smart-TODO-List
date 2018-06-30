@@ -1,7 +1,6 @@
-//pseudo code:
-var request = require ('request');
-
-
+module.exports = {
+  checkQuery: checkQuery
+}
 
 // array of key words:
 var shopArr = ['buy', 'shop', 'acquire', 'purchase', 'obtain', 'stock up']
@@ -33,22 +32,51 @@ function filterEat(query) {
   })
 }
 
+// router.post("/", function(req, res) {
 
+//   if (!req.body.inputActivity) {
+//     res.status(400).json({ error: 'invalid request: no data in POST body'});
+//     return;
+//   }
+//   else{
+
+//     const notrandomInt = checkQuery(req.body.inputActivity)
+//     console.log("inserting?")
+//     knex("tasks")
+//     .insert({'activity': req.body.inputActivity,
+//             'completed': false,
+//             'user_id': req.session.user_id,
+//             'category_id': notrandomInt
+//       })
+//     .then(function(){
+//       console.log("insert done")
+//       res.status(201).send();
+//       // res.redirect("/home")
+//     })
+//     }
+
+//   })
 
 function checkQuery(string) {
   if (filterMovie(string).length !== 0 ){
-    console.log('is it movie?', filterMovie(string));
+
+    console.log('is it movie?', "category_id: 3");
+    return 3;
+
   } else if (filterRead(string).length !== 0){
-    console.log('is it reading?', filterRead(string));
+    console.log('is it reading?', "category_id: 2");
+    return 2;
   } else if (filterEat(string).length !== 0){
-    console.log('is it eating?', filterEat(string));
+    console.log('is it eating?', "category_id: 4");
+    return 4;
   } else if (filterShop(string).length !== 0){
-    console.log('is it shopping?', filterShop(string));
+    console.log('is it shopping?', "category_id: 1");
+    return 1;
   }
 }
 
 var keywordtest = "i wanna read harry potter"
-//checkQuery(keywordtest)
+checkQuery(keywordtest)
 
 
 // so empty array = this is not the category, if keyword found, array of key word will be logged
@@ -84,19 +112,7 @@ function checkDomain (search) {
 
 }
 
-var domaintest = "twilight"
-checkDomain(domaintest)
 
-
-//filterDomain(domaintest)
-
-// function checkDomain(query) {
-//   if ()
-// }
-
-
-// it's kind slow... should i be concern?
-
-
-
+// var domaintest = "twilight"
+// checkDomain(domaintest)
 
