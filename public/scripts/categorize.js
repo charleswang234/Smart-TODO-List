@@ -1,5 +1,5 @@
 module.exports = {
-  checkQuery:checkQuery
+  checkQuery: checkQuery
 }
 
 // array of key words:

@@ -1,6 +1,7 @@
 "use strict"
 const express = require('express');
 const router = express.Router();
+const categorize = require("../public/scripts/categorize.js")
 
 
 
@@ -44,7 +45,7 @@ module.exports = (knex) => {
     return;
   }
   else{
-    let randomInt = checkQuery(req.body.inputActivity);
+    let randomInt = categorize.checkQuery(req.body.inputActivity);
     console.log("inserting?")
     knex("tasks")
     .insert({'activity': req.body.inputActivity,

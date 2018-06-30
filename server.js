@@ -16,7 +16,7 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 const request = require ('request');
-//const checkQuery = require("./public/scripts/categorize.js")
+const categorize = require("./public/scripts/categorize.js")
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
