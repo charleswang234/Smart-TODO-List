@@ -5,12 +5,16 @@ const request = require('request')
 // const stringSimilarity = require('string-similarity');
 // const knexConfig       = require("./knexfile");
 // const knex             = require("knex")(knexConfig.development);
+const yelpKey = process.env.yelpKey;
+const movieKey = process.env.movieKey;
+const bookKey = process.env.bookKey;
+const walmartKey = process.env.walmartKey;
 
-
-const walmart = require('walmart')('nxezyf3pndkz4xpxehn8f9uz');
+const walmart = require('walmart')(walmartKey);
 const yelp = require('yelp-fusion');
  
-const yelpClient = yelp.client('YDnLSKeLk6hYczLeiEitHhFxMYDdIFDpVb7X9luYqSlwId0k-PK8B1HuZytndgdYiPNDS6KVGh-z_jt3hsHQ8YpvpfMsvz-ncoezyc1bk-R1A8TOPVnmCyhata82W3Yx');
+const yelpClient = yelp.client(yelpKey);
+
 
 
 function walmartSearch(searchTerm) {
@@ -26,7 +30,7 @@ function walmartSearch(searchTerm) {
   })
 };
 
-// console.log(walmartSearch('harrypotter'));
+console.log(walmartSearch('harrypotter'));
 
 function yelpSearch(searchTerm) {
     yelpClient.search({
@@ -44,7 +48,7 @@ function yelpSearch(searchTerm) {
 
 }
 
-// console.log(yelpSearch('lighthouse'))
+console.log(yelpSearch('lighthouse'))
 
 function query(searchTerm){
     var searchURL = 'http://www.wolframalpha.com/queryrecognizer/query.jsp?appid=DEMO&mode=Default&i='+ searchTerm +'&output=json'
@@ -59,11 +63,12 @@ function query(searchTerm){
 // console.log(query("books"));
 
 function bookSearch(searchTerm){
-    var key = "AIzaSyCwWA24Ex48X20lZvX9oh3LoL0LnnCHOJ8"
-    var booksURL = "https://www.googleapis.com/books/v1/volumes?q=" + searchTerm + "&orderBy=relevance&maxResults=10&key=" + key
+    var booksURL = "https://www.googleapis.com/books/v1/volumes?q=" + searchTerm + "&orderBy=relevance&maxResults=10&key=" + bookKey;
     request(booksURL, function(err, result, body){
         var info = JSON.parse(body);
-        var booksArr = []
+        // console.log(body);
+        var booksArr = [];
+        // console.log(r)
         for( var i=0; i < info.items.length; i++){
             booksArr.push(info.items[i].volumeInfo.title);
         }
@@ -71,12 +76,10 @@ function bookSearch(searchTerm){
     })
 }
    
-// console.log(bookSearch("harry potter"));
+console.log(bookSearch("harry potter"));
 
 function movieSearch(searchTerm){
-    
-    var moviekey = "068fe8e6d2f836a0b62b57ba9778ad25"
-    var moviesURL = 'https://api.themoviedb.org/3/search/movie?query='+ searchTerm +'&api_key='+ moviekey + '&language=en-US&page=1&include_adult=false'
+    var moviesURL = 'https://api.themoviedb.org/3/search/movie?query='+ searchTerm +'&api_key='+ movieKey + '&language=en-US&page=1&include_adult=false'
     request(moviesURL, function(err, result, body){
         var info = JSON.parse(body);
         var moviesArr = []
@@ -87,4 +90,4 @@ function movieSearch(searchTerm){
     })
 }
 
-// console.log(movieSearch('test'));
+console.log(movieSearch('test'));
