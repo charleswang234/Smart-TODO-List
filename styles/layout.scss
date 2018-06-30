@@ -1,8 +1,14 @@
 
 
 body {
-
+  .todolist{
+    margin: 2rem;
+    font-family: Lato sans-serif;
+  }
   nav {
+    .navbar{
+      background-color: white!important;
+    }
     .navbar-nav {
       display: flex;
       justify-content: space-between;
@@ -16,6 +22,9 @@ body {
       font-size: 1.5rem;
     }
 
+    .form-control.mr-sm-2{
+      width: 250px;
+    }
     .dropdown-menu.show {
       left: auto;
       right: 1rem;
@@ -31,36 +40,46 @@ body {
       color: black;
       cursor: pointer; 
     }
-    btn.btn-outline-success {
+    .btn.btn-outline-success.my-2.my-sm-0 {
       color: #B6A19E;
       background-color: transparent;
       background-image: none;
       border-color: #B6A19E;
     }
 
-    btn.btn-outline-success:hover {
+    .btn.btn-outline-success.my-2.my-sm-0:hover {
       color: #fff;
       background-color: #B6A19E;
       border-color: #B6A19E;
+    }
+    .btn.btn-outline-success.my-2.my-sm-0:focus{
+      outline: none !important;
+      box-shadow: none !important;
     }
   }
 }
 
 section {
+    margin: 1rem 2rem 2rem 2rem;
+  
   .row{
     .col-3{
       .column{
         border: 1px solid rgba(220,220,220,0.5);
         margin: 1rem;
-        min-height: 80vh;
-        border-radius: 10px;
+        min-height: 50vh;
+        border-radius: 5px;
+      p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        padding: 0.5rem 2rem 0.5rem 2rem;
+      }
       }
       .activity{
         background-color: bisque;
-        border-radius: 10px 10px 0px 0px;
+        border-radius: 5px 5px 0px 0px;
         font-size: 1.5rem;
-        text-align: center;
-        padding: 1rem;
+        padding: 1rem 2rem 1rem 2rem;
       }
     }
   }
