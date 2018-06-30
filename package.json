@@ -19,13 +19,18 @@
     "dotenv": "^2.0.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
+    "imdb-api": "^4.0.0",
     "knex": "^0.11.7",
     "knex-logger": "^0.1.0",
     "method-override": "^2.3.10",
     "moment": "^2.22.2",
     "morgan": "^1.7.0",
+    "node-movie": "^2.0.0",
     "node-sass-middleware": "^0.9.8",
-    "pg": "^6.0.2"
+    "omdb": "^0.8.0",
+    "pg": "^6.0.2",
+    "walmart": "0.0.4",
+    "yelp-fusion": "^2.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.17.5",
