@@ -7,13 +7,15 @@
 */
 function createBuy (input) {
   var $contentBuy = $('<p>').addClass('contentBuy').text(input.activity);
-  $('<span>')
+  // $('<span>')
+  // .appendTo($contentBuy);
+  if (input.completed) {
+    $contentBuy.css("text-decoration", "line-through");
+  }
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
   .appendTo($contentBuy);
 
-  $('<i>').addClass('fas fa-clipboard-check')
-  .appendTo($contentBuy);
-
-  $('<i>').addClass('fas fa-trash-alt')
+  $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($contentBuy);
 
   return $contentBuy;
@@ -23,13 +25,15 @@ function createBuy (input) {
 */
 function createWatch (input) {
   var $contentWatch = $('<p>').addClass('contentWatch').text(input.activity);
-  $('<span>')
+  // $('<span>')
+  // .appendTo($contentWatch);
+  if (input.completed) {
+    $contentWatch.css("text-decoration", "line-through");
+  }
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
   .appendTo($contentWatch);
 
-  $('<i>').addClass('fas fa-clipboard-check')
-  .appendTo($contentWatch);
-
-  $('<i>').addClass('fas fa-trash-alt')
+  $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($contentWatch);
 
   return $contentWatch;
@@ -39,13 +43,16 @@ function createWatch (input) {
 */
 function createRead (input) {
   var $contentRead = $('<p>').addClass('contentRead').text(input.activity);
-  $('<span>')
+  // $('<span>')
+  // .appendTo($contentRead);
+
+  if (input.completed) {
+    $contentRead.css("text-decoration", "line-through");
+  }
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
   .appendTo($contentRead);
 
-  $('<i>').addClass('fas fa-clipboard-check')
-  .appendTo($contentRead);
-
-  $('<i>').addClass('fas fa-trash-alt')
+  $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($contentRead);
 
   return $contentRead;
@@ -55,13 +62,16 @@ function createRead (input) {
 */
 function createEat (input) {
   var $contentEat = $('<p>').addClass('contentEat').text(input.activity);
-  $('<span>')
+  // $('<span>')
+  // .appendTo($contentEat);
+
+  if (input.completed) {
+    $contentEat.css("text-decoration", "line-through");
+  }
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
   .appendTo($contentEat);
 
-  $('<i>').addClass('fas fa-clipboard-check')
-  .appendTo($contentEat);
-
-  $('<i>').addClass('fas fa-trash-alt')
+  $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($contentEat);
 
   return $contentEat;
@@ -103,6 +113,88 @@ function newActivity () {
   })
 }
 
+function deleteActivity() {
+  $(document).on('click', '.deleteTask', function() {
+    $( this ).parent().fadeOut();
+    $.ajax({
+     url: "/activity/delete",
+     type: 'POST',
+     data: $.param({task: $(this).parent().text()})
+   }).then(function (jsonActivities) {
+    loadActivities();
+  })
+ })
+  // $('.contentRead').on('click', function(event) {
+  //   console.log(this);
+
+  // });
+}
+
+
+//, style: $(this).parent().css()
+
+function toggleFinishedActivity() {
+  $(document).on('click', '.toggleFinished', function() {
+    $.ajax({
+      url: "/activity/completed",
+      type: 'POST',
+      data: $.param({task: $(this).parent().text()})
+    }).then(function (jsonActivities) {
+      console.log("hi");
+      loadActivities();
+    })
+  })
+}
+
+
+
+/* Renders the activities and places them to specified columns
+*/
+function renderActivities (activities){
+  $('#eatSection').empty();
+  $('#readSection').empty();
+  $('#buySection').empty();
+  $('#watchSection').empty();
+  console.log('*****************************************************');
+  activities.forEach(function (activity){
+    if(activity.category === "Buy"){
+      $('#buySection').prepend(createBuy(activity))
+    }else if (activity.category === "Watch"){
+      $('#watchSection').prepend(createWatch(activity))
+    }else if (activity.category === "Eat"){
+      $('#eatSection').prepend(createEat(activity))
+    }else if (activity.category === "Read"){
+      $('#readSection').prepend(createRead(activity))
+    }
+  })
+}
+
+$(document).ready(function() {
+  loadActivities();
+  console.log("did it get here?");
+
+  newActivity();
+  deleteActivity();
+  toggleFinishedActivity();
+  console.log("test");
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // $('#tweetButton').on('submit', function (event) {
       //   let text = $("textarea").val();
       //   event.preventDefault();
@@ -128,38 +220,3 @@ function newActivity () {
       // })
       // loadTweets();
       // });
-
-
-
-
-/* Renders the activities and places them to specified columns
-*/
-function renderActivities (activities){
-  console.log(activities);
-  $('#eatSection').empty();
-  $('#readSection').empty();
-  $('#buySection').empty();
-  $('#watchSection').empty();
-  console.log('*****************************************************');
-  activities.forEach(function (activity){
-    if(activity.category === "Buy"){
-      $('#buySection').prepend(createBuy(activity))
-    }else if (activity.category === "Watch"){
-      $('#watchSection').prepend(createWatch(activity))
-    }else if (activity.category === "Eat"){
-      $('#eatSection').prepend(createEat(activity))
-    }else if (activity.category === "Read"){
-      $('#readSection').prepend(createRead(activity))
-    }
-  })
-}
-
-$(document).ready(function() {
-  loadActivities();
-  console.log("did it get here?")
-  newActivity();
-  console.log("test")
-
-})
-
-
