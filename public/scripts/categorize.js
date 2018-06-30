@@ -1,5 +1,6 @@
-
-var request = require ('request');
+module.exports = {
+  checkQuery:checkQuery
+}
 
 // array of key words:
 var shopArr = ['buy', 'shop', 'acquire', 'purchase', 'obtain', 'stock up']
@@ -31,30 +32,30 @@ function filterEat(query) {
   })
 }
 
-router.post("/", function(req, res) {
+// router.post("/", function(req, res) {
 
-  if (!req.body.inputActivity) {
-    res.status(400).json({ error: 'invalid request: no data in POST body'});
-    return;
-  }
-  else{
+//   if (!req.body.inputActivity) {
+//     res.status(400).json({ error: 'invalid request: no data in POST body'});
+//     return;
+//   }
+//   else{
 
-    const notrandomInt = checkQuery(req.body.inputActivity)
-    console.log("inserting?")
-    knex("tasks")
-    .insert({'activity': req.body.inputActivity,
-            'completed': false,
-            'user_id': req.session.user_id,
-            'category_id': notrandomInt
-      })
-    .then(function(){
-      console.log("insert done")
-      res.status(201).send();
-      // res.redirect("/home")
-    })
-    }
+//     const notrandomInt = checkQuery(req.body.inputActivity)
+//     console.log("inserting?")
+//     knex("tasks")
+//     .insert({'activity': req.body.inputActivity,
+//             'completed': false,
+//             'user_id': req.session.user_id,
+//             'category_id': notrandomInt
+//       })
+//     .then(function(){
+//       console.log("insert done")
+//       res.status(201).send();
+//       // res.redirect("/home")
+//     })
+//     }
 
-  })
+//   })
 
 function checkQuery(string) {
   if (filterMovie(string).length !== 0 ){
@@ -110,6 +111,7 @@ function checkDomain (search) {
   })
 
 }
+
 
 // var domaintest = "twilight"
 // checkDomain(domaintest)

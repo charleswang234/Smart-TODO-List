@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
+
 function randomInteger(max) {
   return Math.floor(Math.random() * Math.floor(max)) + 1;
 }
@@ -43,7 +44,7 @@ module.exports = (knex) => {
     return;
   }
   else{
-    const randomInt = randomInteger(4);
+    let randomInt = checkQuery(req.body.inputActivity);
     console.log("inserting?")
     knex("tasks")
     .insert({'activity': req.body.inputActivity,
