@@ -65,7 +65,7 @@ module.exports = (knex) => {
     console.log("is it here?", req.body.inputActivity)
     console.log("session",req.session.user_id)
   // let activity = ('inputActivity').val();
-  if (!req.body.inputActivity) {
+  if (!req.body.inputActivity) { // error handling if empty
     res.status(400).json({ error: 'invalid request: no data in POST body'});
     return;
   }

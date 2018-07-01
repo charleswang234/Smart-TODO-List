@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Registration Page</title>
-  </head>
-  <body>
-    <h2>Registration</h2>
-    <section>
-      <form action="/register" method="POST">
-        <div>
-          <label for="first_name">First Name: </label>
-          <input type="text" name="first_name" />
-        </div>
-        <div>
-          <label for= "last_name">Last Name: </label>
-          <input type="text" name="last_name" />
-        </div>
-        <div>
-          <label for="email">Email: </label>
-          <input type="email" name="email" />
-        </div>
-        <div>
-          <label for="password" type = "password" name= "password">Password: </label>
-          <input type = "password" name= "password"/>
-        </div>
-        <div>
-          <label for="verify_password" name= "verify_password">Re-enter Password: </label>
-          <input  type = "password" name= "verify_password"/>
-        </div>
-          <input type="submit" value="Submit">
-      </form>
-    </section>
-  </body>
+<head>
+  <title>Registration Page</title>
+</head>
+<body>
+  <h2>Registration</h2>
+  <section>
+    <form action="/register" method="POST">
+      <div>
+        <label for="first_name">First Name: </label>
+        <input type="text" name="first_name" />
+      </div>
+      <div>
+        <label for= "last_name">Last Name: </label>
+        <input type="text" name="last_name" />
+      </div>
+      <div>
+        <label for="email">Email: </label>
+        <input type="email" name="email" />
+      </div>
+      <div>
+        <label for="password" type = "password" name= "password">Password: </label>
+        <input type = "password" name= "password"/>
+      </div>
+      <div>
+        <label for="verify_password" name= "verify_password">Re-enter Password: </label>
+        <input  type = "password" name= "verify_password"/>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+    <form action="/login" method="GET">
+      <input class="rightbutton" type="submit" value="Back to Login Page">
+    </form>
+  </section>
+</body>
 </html>

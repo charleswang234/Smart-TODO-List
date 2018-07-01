@@ -82,7 +82,7 @@ router.post("/home", (req, res) => {
 
 
    // changing user data
-   router.post("/home/edit", (req, res) => {
+   router.post("/home/edit", (req, res) => {  // error handling
 
     // If not data is going to be changed
     if (emptyString(req.body.first_name) && emptyString(req.body.last_name) &&
@@ -151,7 +151,7 @@ router.post("/home", (req, res) => {
     .select('*')
     .then(function(result){
       console.log(result)
-      if (result.length === 0 ){
+      if (result.length === 0 ){              // error handling
         res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
@@ -194,7 +194,7 @@ router.post("/home", (req, res) => {
     .where({ email: req.body.email })
     .then( function(result){
 
-      if (result.length === 0 ){
+      if (result.length === 0 ){ // error handling (if one field is empty, password not equal)
         const firstName = capitalizeFirstLetter(req.body.first_name);
         const lastName = capitalizeFirstLetter(req.body.last_name);
         knex('users')
