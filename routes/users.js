@@ -18,7 +18,7 @@ function passwordEqual(password, verify_password) {
 
 
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 
@@ -145,14 +145,16 @@ router.post("/home", (req, res) => {
 
   // logging in
   router.post("/login", (req, res) => {
-
+    const errors = [];
     knex('users')
     .where({ email: req.body.email } )
     .select('*')
     .then(function(result){
       console.log(result)
       if (result.length === 0 ){              // error handling
-        res.status(400).json({ error: 'Invalid email or password.'});
+        errors.push('Invalid Credentials');
+        res.render('login', {'errors', errors});
+        // res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
 
@@ -162,8 +164,9 @@ router.post("/home", (req, res) => {
         res.redirect("/home");
         return;
       }
-
-      res.status(400).json({ error: 'Invalid email or password.'});
+      errors.push('Invalid Credentials');
+      res.render('login', {'errors', errors});
+      // res.status(400).json({ error: 'Invalid email or password.'});
       return;
 
     })
