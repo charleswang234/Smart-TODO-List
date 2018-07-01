@@ -163,7 +163,7 @@ function newActivity () {
     // cosole.log("activity",activity)
 
     if (activity === '') {
-      alert('alert');
+       $('#noInputChar').fadeIn(300).delay(500).fadeOut();
       return;
     }else{
       console.log("post")

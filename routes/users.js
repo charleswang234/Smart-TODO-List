@@ -82,7 +82,7 @@ router.post("/home", (req, res) => {
       res.redirect("/login");
       return;
     }
-
+    console.log(req.session.user_id);
     knex('users')
     .where({id: req.session.user_id})
     .select('first_name', 'last_name')
@@ -92,8 +92,9 @@ router.post("/home", (req, res) => {
       name.first_name = completeName[0].first_name;
       name.last_name = completeName[0].last_name;
       res.render("edit", {'errors': errors, 'name': name});
+      return;
     })
-
+    console.log("what          sdfsdf  dfsdfds f dsf dsfds");
   });
 
 
@@ -128,6 +129,7 @@ router.post("/home", (req, res) => {
     const newUserData = {};
     // if old password is incorrect, responds with an error
     if (!bcrypt.compareSync(req.body.old_password, result[0].password)) {
+      console.log('reached point 1');
       errors.push("Wrong old password")
       knex('users')
       .where({id: req.session.user_id})
@@ -172,10 +174,11 @@ router.post("/home", (req, res) => {
       .update(newUserData)
       .then((result) => {
         console.log(result);
+        res.redirect("/home");
+        return;
       })
 
-      res.redirect("/home");
-      return;
+
     }
 
   });
