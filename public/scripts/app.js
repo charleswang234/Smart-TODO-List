@@ -354,7 +354,7 @@ $(function() {
   'url("images/Itanki.jpg")',
   );
   var current = 0;
-  
+
   function nextBackground() {
     body.css('background', backgrounds[current = ++current % backgrounds.length]);
     setTimeout(nextBackground, 30000);
