@@ -22,11 +22,11 @@
     <form action="/home/edit" method="POST">
       <div>
         <label for="first_name">First Name: </label>
-        <input type="text" name= "first_name" placeholder="<%=first_name%>"/>
+        <input type="text" name= "first_name" placeholder="<%=name.first_name%>"/>
       </div>
       <div>
         <label for="last_name">Last Name: </label>
-        <input type="text" name= "last_name" placeholder="<%=last_name%>"/>
+        <input type="text" name= "last_name" placeholder="<%=name.last_name%>"/>
       </div>
       <div>
         <label for="password">New password: </label>
@@ -45,6 +45,10 @@
     <form action="/home" method="GET">
       <input class="rightbutton" type="submit" value="Back">
     </form>
+
+    <%  errors.forEach(function(error) { %>
+    <p><%= error %></p>
+    <% }) %>
   </section>
 
 </body>

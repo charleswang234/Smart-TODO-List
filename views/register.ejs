@@ -33,5 +33,8 @@
       <input class="rightbutton" type="submit" value="Back to Login Page">
     </form>
   </section>
+  <%  errors.forEach(function(error) { %>
+  <p><%= error %></p>
+  <% }) %>
 </body>
 </html>

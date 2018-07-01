@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
-  <head>
-    <title>Smart TODO List Login</title>
-    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<head>
+  <title>Smart TODO List Login</title>
+  <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <header>
-      <h1>SMART TO-DO-LIST</h1>
-    </header>
-    <section>
-      <form action="/login" method="POST">
-        <div class="form">
-          <label for= "Email">Username: </label>
-          <input type="Email" name= "email" value="" class='input' placeholder="Enter email"/>
-        </div>
-        <div class="form">
-          <label for = "userPassword">Password: </label>
-          <input type="password" name= "password" value="" class='input' placeholder="Enter password"/>
-        </div>
-        <div class="submit">
-          <span>
-            <input class="submitbutton" type="submit" name="" value="Log In"/>
-            
-          </span>
-        </div>
-        <div class="register">
-          <a href="/register" class="registerbutton">Register now</a>
-        </div>
-      </form>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>SMART TO-DO-LIST</h1>
+  </header>
+  <section>
+    <form action="/login" method="POST">
+      <div class="form">
+        <label for= "Email">Username: </label>
+        <input type="Email" name= "email" value="" class='input' placeholder="Enter email"/>
+      </div>
+      <div class="form">
+        <label for = "userPassword">Password: </label>
+        <input type="password" name= "password" value="" class='input' placeholder="Enter password"/>
+      </div>
+      <div class="submit">
+        <span>
+          <input class="submitbutton" type="submit" name="" value="Log In"/>
 
-    </section>
+        </span>
+      </div>
+      <div class="register">
+        <a href="/register" class="registerbutton">Register now</a>
+      </div>
+    </form>
+    <%  errors.forEach(function(error) { %>
+    <p><%= error %></p>
+    <% }) %>
+  </section>
 
-  </body>
+</body>
 </html>

@@ -22,9 +22,24 @@ function capitalizeFirstLetter(string) {
 }
 
 
+
+
 module.exports = (knex) => {
 
- router.get("/", (req, res) => {
+//   function fullName(req) {
+//   knex('users')
+//   .where({id: req.session.user_id})
+//   .select('first_name', 'last_name')
+//   .then((completeName) => {
+//       const name = {}; // selects the first_name and last_name to display in placeholder for edit
+//       // console.log(completeName);
+//       name.first_name = completeName[0].first_name;
+//       name.last_name = completeName[0].last_name;
+//       return name;
+//     })
+// }
+
+router.get("/", (req, res) => {
   if(req.session.user_id) {
     res.redirect("/home");
     return;
@@ -59,12 +74,15 @@ router.post("/home", (req, res) => {
   res.redirect('/home');
 });
 
+
    // renders the edit page
    router.get("/home/edit", (req, res) => {
+    const errors = [];
     if (!req.session.user_id) { // user not logged in
       res.redirect("/login");
       return;
     }
+
     knex('users')
     .where({id: req.session.user_id})
     .select('first_name', 'last_name')
@@ -73,8 +91,7 @@ router.post("/home", (req, res) => {
       // console.log(completeName);
       name.first_name = completeName[0].first_name;
       name.last_name = completeName[0].last_name;
-      console.log(name);
-      res.render("edit", name);
+      res.render("edit", {'errors': errors, 'name': name});
     })
 
   });
@@ -82,15 +99,28 @@ router.post("/home", (req, res) => {
 
 
    // changing user data
-   router.post("/home/edit", (req, res) => {  // error handling
-
-    // If not data is going to be changed
+   router.post("/home/edit", (req, res) => {
+    const errors = [];
+    // If no data is going to be changed
     if (emptyString(req.body.first_name) && emptyString(req.body.last_name) &&
       emptyString(req.body.password) && emptyString(req.body.verify_password)) {
       // res.redirect("/home/edit");
-    res.redirect("/home/edit");
-    return;
+    errors.push("No new data entered")
+    knex('users')
+    .where({id: req.session.user_id})
+    .select('first_name', 'last_name')
+    .then((completeName) => {
+      const name = {}; // selects the first_name and last_name to display in placeholder for edit
+      // console.log(completeName);
+      name.first_name = completeName[0].first_name;
+      name.last_name = completeName[0].last_name;
+      res.render("edit", {'errors': errors, 'name': name});
+      return;
+    })
+
+
   }
+
   knex('users')
   .where({ id: req.session.user_id})
   .select('*')
@@ -98,12 +128,36 @@ router.post("/home", (req, res) => {
     const newUserData = {};
     // if old password is incorrect, responds with an error
     if (!bcrypt.compareSync(req.body.old_password, result[0].password)) {
-      console.log(result);
-      res.status(400).json({ error: 'incorrect old password'});
+      errors.push("Wrong old password")
+      knex('users')
+      .where({id: req.session.user_id})
+      .select('first_name', 'last_name')
+      .then((completeName) => {
+      const name = {}; // selects the first_name and last_name to display in placeholder for edit
+      // console.log(completeName);
+      name.first_name = completeName[0].first_name;
+      name.last_name = completeName[0].last_name;
+      res.render("edit", {'errors': errors, 'name': name});
       return;
+    })
+      // console.log(result);
+      // res.status(400).json({ error: 'incorrect old password'});
+
     } else {
       if (! passwordEqual(req.body.password, req.body.verify_password)) {
-        res.status(400).json({ error: "new passwords don't match"});
+        errors.push("New password don't match");
+        knex('users')
+        .where({id: req.session.user_id})
+        .select('first_name', 'last_name')
+        .then((completeName) => {
+      const name = {}; // selects the first_name and last_name to display in placeholder for edit
+      // console.log(completeName);
+      name.first_name = completeName[0].first_name;
+      name.last_name = completeName[0].last_name;
+      res.render("edit", {'errors': errors, 'name': name});
+      return;
+    })
+        // res.status(400).json({ error: "new passwords don't match"});
       } else if (!emptyString(req.body.password)) {
         newUserData.password = hashing(req.body.password);
       }
@@ -135,11 +189,12 @@ router.post("/home", (req, res) => {
 
   // login page
   router.get("/login", (req, res) => {
+    const errors = [];
     if(req.session.user_id) {
       res.redirect("/home");
       return;
     }
-    res.render("login");
+    res.render("login", {'errors': errors});
   });
 
 
@@ -153,7 +208,7 @@ router.post("/home", (req, res) => {
       console.log(result)
       if (result.length === 0 ){              // error handling
         errors.push('Invalid Credentials');
-        res.render('login', {'errors', errors});
+        res.render('login', {'errors': errors});
         // res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
@@ -165,7 +220,7 @@ router.post("/home", (req, res) => {
         return;
       }
       errors.push('Invalid Credentials');
-      res.render('login', {'errors', errors});
+      res.render('login', {'errors': errors});
       // res.status(400).json({ error: 'Invalid email or password.'});
       return;
 
@@ -181,7 +236,8 @@ router.post("/home", (req, res) => {
       res.redirect("/home");
       return;
     }
-    res.render("register");
+    const errors = [];
+    res.render("register", {'errors': errors});
   });
 
   // hashing function
@@ -192,10 +248,31 @@ router.post("/home", (req, res) => {
 
   // submitting a registration
   router.post("/register", (req, res) => {
+    const errors = [];
     knex('users')
     .select('*')
     .where({ email: req.body.email })
     .then( function(result){
+      // one of them is empty (missing info)
+      // check email exists
+      // check if passwords are equal
+
+      // if one section is empty
+      if (emptyString(req.body.first_name) || emptyString(req.body.last_name)
+        || emptyString(req.body.password) || emptyString(req.body.email)
+        || emptyString(req.body.verify_password)) {
+        errors.push("please fill out the entire form");
+      res.render("register", {'errors': errors});
+      return;
+    }
+
+      // if passwords don't match
+      if (req.body.password !== req.body.verify_password) {
+        errors.push("Passwords are not Equal");
+        res.render("register", {'errors': errors});
+        return;
+      }
+
 
       if (result.length === 0 ){ // error handling (if one field is empty, password not equal)
         const firstName = capitalizeFirstLetter(req.body.first_name);
@@ -222,8 +299,9 @@ router.post("/home", (req, res) => {
         return;
       }
         //error email already exists
-        res.status(400).json({ error: 'Invalid request: email already exists.'})
-        console.log("error! email exists")
+
+        errors.push("Email already exists");
+        res.render("register", {'errors': errors});
         return;
       })
   });
