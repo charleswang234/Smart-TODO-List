@@ -1,13 +1,29 @@
 
-
+#body{
+  background-size: cover;
+  // background:url("images/lupoing.jpg") no-repeat top center fixed;
+  transition:2s all ease-in-out;
+}
 body {
+  padding: 2rem 6rem 2rem 6rem!important;
+  font-family: 'Roboto', sans-serif!important;
+  //background:url("images/lupoing.jpg") no-repeat top center fixed;
+  //background-color: #107896!important;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  color: #f1f1f1!important;
+
+  .bg-light {
+    background-color: none!important;
+  }
   .todolist{
     margin: 2rem;
-    font-family: Lato sans-serif;
   }
   nav {
-    .navbar{
-      background-color: white!important;
+    .fa-nintendo-switch:before {
+      color:white;
+      padding-left: 1.1rem
     }
     .navbar-nav {
       display: flex;
@@ -15,15 +31,17 @@ body {
       width: 100%;
     }
     .nav-link.user {
-        padding-top: 1rem;
+      padding-top: 1rem;
+      color: white!important;
     }    
     .fa-bars:before {
       content: "\f0c9";
       font-size: 1.5rem;
+      color: white;
     }
 
     .form-control.mr-sm-2{
-      width: 250px;
+      width: 210px;
     }
     .dropdown-menu.show {
       left: auto;
@@ -64,24 +82,54 @@ section {
   
   .row{
     .col-3{
+      padding: 0px;
       .column{
-        border: 1px solid rgba(220,220,220,0.5);
+        border: 2px solid rgba(0,0,0,0.4);
         margin: 1rem;
         min-height: 50vh;
-        border-radius: 5px;
+        border-radius: 2px;
       p {
         margin-top: 0;
         margin-bottom: 1rem;
         padding: 0.5rem 2rem 0.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
       }
       }
       .activity{
-        background-color: bisque;
-        border-radius: 5px 5px 0px 0px;
-        font-size: 1.5rem;
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 2px 0px 2px 0px;
+        font-size: 1rem;
         padding: 1rem 2rem 1rem 2rem;
       }
     }
   }
 }
 
+@media (max-width: 920px) {
+      body {
+        padding: 2rem 0.5rem 2rem .5rem!important;
+      }
+      section {
+        margin: 1rem 2rem 2rem 2rem;
+      
+      .row{
+        .col-3{
+          padding: 0px;
+          .column{
+            border: 2px solid rgba(0,0,0,0.4);
+            margin: 1rem;
+            min-height: 50vh;
+            border-radius: 2px;
+          p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+          }  
+        }
+      }
+    }
+  }
+ }

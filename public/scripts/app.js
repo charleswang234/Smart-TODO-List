@@ -103,34 +103,6 @@ function newActivity () {
   })
 }
 
-    // $('#tweetButton').on('submit', function (event) {
-      //   let text = $("textarea").val();
-      //   event.preventDefault();
-      //   if (text === '') {
-      //     $('.noInputChar').fadeIn(300).delay(500).fadeOut();
-      //     return;
-      //   } else if (text.length > lengthMax) {
-      //     $('.tooManyChar').fadeIn(300).delay(500).fadeOut();
-      //     return;
-      //   } else {
-      //        $.ajax({
-      //         url: '/tweets',
-      //         type: 'POST',
-      //         data: $(this).serialize(),
-      //       }).then(function (obj){
-      //           $('.noInputChar').hide();
-      //           $('.tooManyChar').hide();
-      //           $("textarea").val('');
-      //           $('#counter').html('140');
-      //           loadTweets();
-      //     })
-      //   }
-      // })
-      // loadTweets();
-      // });
-
-
-
 
 /* Renders the activities and places them to specified columns
 */
@@ -162,4 +134,21 @@ $(document).ready(function() {
 
 })
 
+
+$(function() {
+  var body = $('#body');
+  var backgrounds = new Array(
+  'url("images/lupoing.jpg")',
+  'url("images/barrika.jpg")',
+  'url("images/Itanki.jpg")',
+  );
+  var current = 0;
+  
+  function nextBackground() {
+    body.css('background', backgrounds[current = ++current % backgrounds.length]);
+    setTimeout(nextBackground, 30000);
+  }
+  setTimeout(nextBackground, 30000);
+  body.css('background', backgrounds[0]);
+});
 
