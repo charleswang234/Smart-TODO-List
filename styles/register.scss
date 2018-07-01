@@ -10,8 +10,9 @@ body{
     border-radius: 20px;
     padding: 3rem!important;
     opacity: 0.93;
+    width: 24rem;
     header{
-        h1{
+        h2{
             font-size: X-large;
             text-align: center;
             padding-bottom:2rem; 
@@ -23,18 +24,6 @@ body{
                 padding-top: 0.5rem;
                 padding-bottom: 1rem;
             }
-            .submit{
-                margin-top:1.5rem;
-                text-align: center;
-                padding: .5rem;
-                background: rgb(138, 189, 223);
-                border-radius: 30px;
-                opacity: 0.7;
-                .submitbutton{
-                    border:none;
-                    background:none;
-                }
-            }
             .register{
                 text-align: center;
                 padding: 0.5rem;
@@ -43,7 +32,8 @@ body{
                 margin-top: 1rem;
                 opacity:0.7;
                 .registerbutton{
-                    color:black!important;
+                    border:none;
+                    background:none;
                 }
             }
             div{

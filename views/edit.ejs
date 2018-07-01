@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>Smart TODO List Edit Profile</title>
+  <link rel="stylesheet" href="/styles/edit.css" type="text/css" />
 
   <!-- bootstrap stylesheet -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -20,27 +21,30 @@
   </header>
   <section>
     <form action="/home/edit" method="POST">
-      <div>
+      <div class='form'>
         <label for="first_name">First Name: </label>
-        <input type="text" name= "first_name" placeholder="<%=name.first_name%>"/>
+        <input class='input' type="text" name= "first_name" placeholder="<%=name.first_name%>"/>
       </div>
-      <div>
+      <div class='form'>
         <label for="last_name">Last Name: </label>
-        <input type="text" name= "last_name" placeholder="<%=name.last_name%>"/>
+        <input class='input' type="text" name= "last_name" placeholder="<%=name.last_name%>"/>
       </div>
-      <div>
+      <div class='form'>
         <label for="password">New password: </label>
-        <input type="password" name= "password"/>
+        <input class='input' type="password" name= "password"/>
       </div>
-      <div>
+      <div class='form'>
         <label for="verify_password" name= "verify_password">Re-enter New Password: </label>
-        <input  type = "password" name= "verify_password"/>
+        <input class='input' type = "password" name= "verify_password"/>
       </div>
-      <div>
+      <div class='form'>
         <label for="old_password" name= "old_password">Enter Old Password: </label>
-        <input  type = "password" name= "old_password"/>
+        <input class='input' type = "password" name= "old_password"/>
       </div>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">submit</button>
+      <div class="submit">
+      <button class="submitbutton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+      </div>
+      <div class='back'>
     </form>
     <form action="/home" method="GET">
       <input class="rightbutton" type="submit" value="Back">

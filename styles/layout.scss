@@ -2,11 +2,11 @@
 #body{
   background-size: cover;
   // background:url("images/lupoing.jpg") no-repeat top center fixed;
-  transition:2s all ease-in-out;
+  transition:2s all cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 body {
   padding: 2rem 6rem 2rem 6rem!important;
-  font-family: 'Roboto', sans-serif!important;
+  font-family: 'Open Sans', sans-serif!important;
   //background:url("images/lupoing.jpg") no-repeat top center fixed;
   //background-color: #107896!important;
   background-size: cover;
@@ -91,9 +91,30 @@ section {
       p {
         margin-top: 0;
         margin-bottom: 1rem;
-        padding: 0.5rem 2rem 0.5rem 2rem;
+        padding: 0.5rem 1rem 0.5rem 2rem;
         display: flex;
         justify-content: space-between;
+        .fa-check-circle{
+          padding-top: 4px;
+        }
+        .decorateTask{
+          padding-left:0.5rem;
+          width: 80%
+        }
+        .barTrash{
+          width: 50px;
+          display: flex;
+          justify-content: space-between;
+          margin-top: 2px;
+        }
+        .fa-caret-square-down{
+          padding-top: 3px;
+          color: white;
+        }
+        .fa-trash-alt{
+          padding-top: 3px;
+        }
+        
       }
       }
       .activity{
@@ -106,7 +127,7 @@ section {
   }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1200px) {
       body {
         padding: 2rem 0.5rem 2rem .5rem!important;
       }

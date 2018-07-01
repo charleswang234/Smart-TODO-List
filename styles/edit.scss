@@ -10,6 +10,7 @@ body{
     border-radius: 20px;
     padding: 3rem!important;
     opacity: 0.93;
+    width: 24rem;
     header{
         h1{
             font-size: X-large;
@@ -35,15 +36,16 @@ body{
                     background:none;
                 }
             }
-            .register{
+            .back{
                 text-align: center;
                 padding: 0.5rem;
                 background: rgb(138, 189, 223);
                 border-radius: 30px;
                 margin-top: 1rem;
                 opacity:0.7;
-                .registerbutton{
-                    color:black!important;
+                .rightbutton{
+                    border:none;
+                    background:none;
                 }
             }
             div{
@@ -54,9 +56,8 @@ body{
                 background: transparent;
                 border-bottom: 1px solid rgba(0,0,0,0.4);
                 width: 100%;
+                }
             }
-   
         }
     }
-}
 }

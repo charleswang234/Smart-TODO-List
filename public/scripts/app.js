@@ -5,12 +5,9 @@
 
 
 function dropDown () {
-  theDropDown = `<a class="fas fa-bars" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon">
-
-  </span>
-  </button>
+  theDropDown = `<a class="far fa-caret-square-down" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button hidden class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+   </button>
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
   <a class="dropdown-item eatChange" href="#">
@@ -36,10 +33,10 @@ function dropDown () {
 function createBuy (input) {
   // creates a paragraph
   var $contentBuy = $('<p>').addClass('contentBuy');
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  $('<i>').addClass('far fa-check-circle toggleFinished')
   .appendTo($contentBuy);
   const $realText = $('<span>');
-
+  $('<div>').addClass('buyactivity').appendTo($contentBuy)
   $realText.addClass('decorateTask').text(input.activity).appendTo($contentBuy);
   if (input.completed) {
     $realText.css("text-decoration", "line-through");
@@ -47,13 +44,14 @@ function createBuy (input) {
 
   // creates an extra section and append to the paragraph
   const $span = $('<span>');
-  $span.appendTo($contentBuy);
+  $span.addClass('barTrash').appendTo($contentBuy);
 
   // all the symbols and drop down menu
+  $('<div>').appendTo($span)
   $(dropDown()).appendTo($span);
 
 
-  $('<i>').addClass('fas fa-trash-alt deleteTask')
+  $('<i>').addClass('far fa-trash-alt deleteTask')
   .appendTo($span);
 
   return $contentBuy;
@@ -64,7 +62,7 @@ function createBuy (input) {
 function createWatch (input) {
   // creates a paragraph
   var $contentWatch = $('<p>').addClass('contentWatch');
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  $('<i>').addClass('far fa-check-circle toggleFinished')
   .appendTo($contentWatch);
   const $realText = $('<span>');
 
@@ -75,13 +73,14 @@ function createWatch (input) {
 
   // creates an extra section and append to the paragraph
   const $span = $('<span>');
-  $span.appendTo($contentWatch);
+  $span.addClass('barTrash').appendTo($contentWatch);
 
   // all the symbols and drop down menu
+  $('<div>').appendTo($span)
   $(dropDown()).appendTo($span);
 
 
-  $('<i>').addClass('fas fa-trash-alt deleteTask')
+  $('<i>').addClass('far fa-trash-alt deleteTask')
   .appendTo($span);
 
   return $contentWatch;
@@ -92,7 +91,7 @@ function createWatch (input) {
 function createRead (input) {
   // creates a paragraph
   var $contentRead = $('<p>').addClass('contentRead');
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  $('<i>').addClass('far fa-check-circle toggleFinished')
   .appendTo($contentRead);
   const $realText = $('<span>');
 
@@ -103,13 +102,14 @@ function createRead (input) {
 
   // creates an extra section and append to the paragraph
   const $span = $('<span>');
-  $span.appendTo($contentRead);
+  $span.addClass('barTrash').appendTo($contentRead);
 
   // all the symbols and drop down menu
+  $('<div>').appendTo($span)
   $(dropDown()).appendTo($span);
 
 
-  $('<i>').addClass('fas fa-trash-alt deleteTask')
+  $('<i>').addClass('far fa-trash-alt deleteTask')
   .appendTo($span);
 
   return $contentRead;
@@ -120,7 +120,7 @@ function createRead (input) {
 function createEat (input) {
   // creates a paragraph
   var $contentEat = $('<p>').addClass('contentEat');
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  $('<i>').addClass('far fa-check-circle toggleFinished')
   .appendTo($contentEat);
   const $realText = $('<span>');
 
@@ -131,13 +131,14 @@ function createEat (input) {
 
   // creates an extra section and append to the paragraph
   const $span = $('<span>');
-  $span.appendTo($contentEat);
+  $span.addClass('barTrash').appendTo($contentEat);
 
   // all the symbols and drop down menu
+  $('<div>').appendTo($span)
   $(dropDown()).appendTo($span);
 
 
-  $('<i>').addClass('fas fa-trash-alt deleteTask')
+  $('<i>').addClass('far fa-trash-alt deleteTask')
   .appendTo($span);
 
   return $contentEat;
@@ -357,9 +358,9 @@ $(function() {
 
   function nextBackground() {
     body.css('background', backgrounds[current = ++current % backgrounds.length]);
-    setTimeout(nextBackground, 30000);
+    setTimeout(nextBackground, 10000);
   }
-  setTimeout(nextBackground, 30000);
+  setTimeout(nextBackground, 10000);
   body.css('background', backgrounds[0]);
 });
 
