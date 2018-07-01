@@ -10,7 +10,33 @@ function randomInteger(max) {
 }
 
 
+
 module.exports = (knex) => {
+  function changeTask(category, req, res) {
+    knex('tasks')
+    .where({"user_id": req.session.user_id})
+    .andWhere({"activity":req.body.task})
+    .select("*")
+    .then(function(activity) {
+      if (activity[0].category_id === category) {
+        console.log('no change');
+        res.status(201).send();
+        return;
+      } else {
+        knex('tasks')
+        .where({"user_id": req.session.user_id})
+        .andWhere({"activity":req.body.task})
+        .update({"category_id": category})
+        .then(function(activity) {
+          console.log('changed');
+          res.status(201).send();
+        })
+      }
+    })
+  }
+
+
+
   router.get("/", (req, res) => {
     // knex.select('*')
     // .from('tasks')
@@ -94,103 +120,27 @@ module.exports = (knex) => {
   // change section to the eat section
   router.post("/toeat", function(req, res) {
     console.log(req.body);
-    knex('tasks')
-    .where({"user_id": req.session.user_id})
-    .andWhere({"activity":req.body.task})
-    .select("*")
-    .then(function(activity) {
-      if (activity[0].category_id === 4) {
-        console.log('no change');
-        res.status(201).send();
-        return;
-      } else {
-        knex('tasks')
-        .where({"user_id": req.session.user_id})
-        .andWhere({"activity":req.body.task})
-        .update({"category_id": 4})
-        .then(function(activity) {
-          console.log('changed');
-          res.status(201).send();
-        })
-      }
-    })
+    changeTask(4, req, res);
   });
 
   // change section to the read section
   router.post("/toread", function(req, res) {
     console.log(req.body);
-    knex('tasks')
-    .where({"user_id": req.session.user_id})
-    .andWhere({"activity":req.body.task})
-    .select("*")
-    .then(function(activity) {
-      console.log(activity);
-      if (activity[0].category_id === 2) {
-        console.log('no change');
-        res.status(201).send();
-        return;
-      } else {
-        knex('tasks')
-        .where({"user_id": req.session.user_id})
-        .andWhere({"activity":req.body.task})
-        .update({"category_id": 2})
-        .then(function(activity) {
-          console.log('changed');
-          res.status(201).send();
-        })
-      }
-    })
+    changeTask(2, req, res);
   });
 
 
   // change section to the buy section
   router.post("/tobuy", function(req, res) {
     console.log(req.body);
-    knex('tasks')
-    .where({"user_id": req.session.user_id})
-    .andWhere({"activity":req.body.task})
-    .select("*")
-    .then(function(activity) {
-      if (activity[0].category_id === 1) {
-        console.log('no change');
-        res.status(201).send();
-        return;
-      } else {
-        knex('tasks')
-        .where({"user_id": req.session.user_id})
-        .andWhere({"activity":req.body.task})
-        .update({"category_id": 1})
-        .then(function(activity) {
-          console.log('changed');
-          res.status(201).send();
-        })
-      }
-    })
+    changeTask(1, req, res);
   });
 
   // change section to the watch section
   router.post("/towatch", function(req, res) {
     console.log(req.body);
-    knex('tasks')
-    .where({"user_id": req.session.user_id})
-    .andWhere({"activity":req.body.task})
-    .select("*")
-    .then(function(activity) {
-      if (activity[0].category_id === 3) {
-        console.log('no change');
-        res.status(201).send();
-        return;
-      } else {
-        knex('tasks')
-        .where({"user_id": req.session.user_id})
-        .andWhere({"activity":req.body.task})
-        .update({"category_id": 3})
-        .then(function(activity) {
-          console.log('changed');
-          res.status(201).send();
-        })
-      }
-    })
+    changeTask(3, req, res);
   });
+
   return router;
 }
