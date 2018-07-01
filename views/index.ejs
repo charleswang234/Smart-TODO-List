@@ -41,7 +41,7 @@
           <nav class="navbar navbar-light bg-light">
             <form class="form-inline" id="addButton" action="/activity" method="POST">
               <!-- this is where activity is writen in -->
-              <input class="form-control mr-sm-2" name="inputActivity" type="search" placeholder="What do you want to do?" aria-label="Do">
+              <input class="form-control mr-sm-2" name="inputActivity" type="search" placeholder="What do you want to do?" aformat_indent_decreaseria-label="Do">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Do!</button>
             </form>
           </nav>
@@ -64,26 +64,27 @@
             <a class="dropdown-item" href="#">
               <form action="/home/edit" method="GET">
                 <input class="rightbutton" type="submit" value="Edit Profile">
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+              </form>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <section>
-      <span id="date">
-        <script>
-          var d = moment(new Date()).format('dddd, MMMM Do YYYY');
-          document.getElementById("date").innerHTML = d;
-        </script>
-      </span>
-      <span class="weather">21.C</span>
-      <div class="row">
-        <div class="col-3">
-          <div class="column">
-            <h5 class="activity" id="eat">Eat</h5>
-            <article id="eatSection">
+  <section>
+    <span id="date">
+      <script>
+        var d = moment(new Date()).format('dddd, MMMM Do YYYY');
+        document.getElementById("date").innerHTML = d;
+      </script>
+    </span>
+    <span class="weather">21.C</span>
+    <div class="row">
+      <div class="col-3">
+        <div class="column">
+          <h5 class="activity" id="eat">Eat</h5>
+          <article id="eatSection">
             <!-- <p class="contentEat">Content
               <span>
                 <i class="fas fa-clipboard-check"></i>
@@ -130,7 +131,7 @@
                   </span>
                 </p> -->
               </article>
-              </div>
+            </div>
 <!-- =======
   <section id= "activity-container">
     <div class="row">

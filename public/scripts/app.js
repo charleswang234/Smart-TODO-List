@@ -3,20 +3,58 @@
 //   $( "#activity-container .eat").append($("<p>").text("hello there"));
 // }
 
+
+function dropDown () {
+  theDropDown = `<a class="fas fa-bars" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon">
+
+              </span>
+            </button>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item eatChange" href="#">
+              <p>Eat</p>
+            </a>
+            <!-- these will have to be forms to have POST methods -->
+            <a class="dropdown-item readChange href="#">
+              <p>Read</p>
+            </a>
+            <a class="dropdown-item buyChange" href="#">
+              <p>Buy</p>
+            </a>
+            <a class="dropdown-item watchChange" href="#">
+              <p>Watch</p>
+            </a>
+          </div>`;
+  return theDropDown;
+}
+
+
 /* Appends a buy activity to index file.
 */
 function createBuy (input) {
-  var $contentBuy = $('<p>').addClass('contentBuy').text(input.activity);
-  // $('<span>')
-  // .appendTo($contentBuy);
+  // creates a paragraph
+  var $contentBuy = $('<p>').addClass('contentBuy');
+
+  const $realText = $('<span>');
+
+  $realText.addClass('decorateTask').text(input.activity).appendTo($contentBuy);
   if (input.completed) {
-    $contentBuy.css("text-decoration", "line-through");
+    $realText.css("text-decoration", "line-through");
   }
+
+  // creates an extra section and append to the paragraph
+  const $span = $('<span>');
+  $span.appendTo($contentBuy);
+
+  // all the symbols and drop down menu
+  $(dropDown()).appendTo($span);
   $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($contentBuy);
+  .appendTo($span);
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
-  .appendTo($contentBuy);
+  .appendTo($span);
 
   return $contentBuy;
 }
@@ -24,17 +62,27 @@ function createBuy (input) {
 /* Appends a watch activity to index file.
 */
 function createWatch (input) {
-  var $contentWatch = $('<p>').addClass('contentWatch').text(input.activity);
-  // $('<span>')
-  // .appendTo($contentWatch);
+  // creates a paragraph
+  var $contentWatch = $('<p>').addClass('contentWatch');
+
+  const $realText = $('<span>');
+
+  $realText.addClass('decorateTask').text(input.activity).appendTo($contentWatch);
   if (input.completed) {
-    $contentWatch.css("text-decoration", "line-through");
+    $realText.css("text-decoration", "line-through");
   }
+
+  // creates an extra section and append to the paragraph
+  const $span = $('<span>');
+  $span.appendTo($contentWatch);
+
+  // all the symbols and drop down menu
+  $(dropDown()).appendTo($span);
   $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($contentWatch);
+  .appendTo($span);
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
-  .appendTo($contentWatch);
+  .appendTo($span);
 
   return $contentWatch;
 }
@@ -42,18 +90,27 @@ function createWatch (input) {
 /* Appends a read activity to index file.
 */
 function createRead (input) {
-  var $contentRead = $('<p>').addClass('contentRead').text(input.activity);
-  // $('<span>')
-  // .appendTo($contentRead);
+  // creates a paragraph
+  var $contentRead = $('<p>').addClass('contentRead');
 
+  const $realText = $('<span>');
+
+  $realText.addClass('decorateTask').text(input.activity).appendTo($contentRead);
   if (input.completed) {
-    $contentRead.css("text-decoration", "line-through");
+    $realText.css("text-decoration", "line-through");
   }
+
+  // creates an extra section and append to the paragraph
+  const $span = $('<span>');
+  $span.appendTo($contentRead);
+
+  // all the symbols and drop down menu
+  $(dropDown()).appendTo($span);
   $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($contentRead);
+  .appendTo($span);
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
-  .appendTo($contentRead);
+  .appendTo($span);
 
   return $contentRead;
 }
@@ -61,21 +118,31 @@ function createRead (input) {
 /* Appends a eat activity to index file.
 */
 function createEat (input) {
-  var $contentEat = $('<p>').addClass('contentEat').text(input.activity);
-  // $('<span>')
-  // .appendTo($contentEat);
+  // creates a paragraph
+  var $contentEat = $('<p>').addClass('contentEat');
 
+  const $realText = $('<span>');
+
+  $realText.addClass('decorateTask').text(input.activity).appendTo($contentEat);
   if (input.completed) {
-    $contentEat.css("text-decoration", "line-through");
+    $realText.css("text-decoration", "line-through");
   }
+
+  // creates an extra section and append to the paragraph
+  const $span = $('<span>');
+  $span.appendTo($contentEat);
+
+  // all the symbols and drop down menu
+  $(dropDown()).appendTo($span);
   $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($contentEat);
+  .appendTo($span);
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
-  .appendTo($contentEat);
+  .appendTo($span);
 
   return $contentEat;
 }
+
 
 /* Load all activities to the columns
 */
@@ -119,7 +186,7 @@ function deleteActivity() {
     $.ajax({
      url: "/activity/delete",
      type: 'POST',
-     data: $.param({task: $(this).parent().text()})
+     data: $.param({task: $(this).parent().parent().children(":first").text()})
    }).then(function (jsonActivities) {
     loadActivities();
   })
@@ -138,9 +205,63 @@ function toggleFinishedActivity() {
     $.ajax({
       url: "/activity/completed",
       type: 'POST',
-      data: $.param({task: $(this).parent().text()})
+      data: $.param({task: $(this).parent().parent().children(":first").text()})
     }).then(function (jsonActivities) {
       console.log("hi");
+      loadActivities();
+    })
+  })
+}
+
+function changeToEat() {
+  $(document).on('click', '.eatChange', function() {
+    $.ajax({
+      url: "/activity/toeat",
+      type: 'POST',
+      // contentType: "application/json",
+      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+    }).then(function (jsonActivities) {
+      loadActivities();
+    })
+  })
+}
+
+
+// read buy watch
+function changeToRead() {
+  $(document).on('click', '.readChange', function() {
+    $.ajax({
+      url: "/activity/toread",
+      type: 'POST',
+      // contentType: "application/json",
+      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+    }).then(function (jsonActivities) {
+      loadActivities();
+    })
+  })
+}
+
+function changeToBuy() {
+  $(document).on('click', '.buyChange', function() {
+    $.ajax({
+      url: "/activity/tobuy",
+      type: 'POST',
+      // contentType: "application/json",
+      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+    }).then(function (jsonActivities) {
+      loadActivities();
+    })
+  })
+}
+
+function changeToWatch() {
+  $(document).on('click', '.watchChange', function() {
+    $.ajax({
+      url: "/activity/towatch",
+      type: 'POST',
+      // contentType: "application/json",
+      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+    }).then(function (jsonActivities) {
       loadActivities();
     })
   })
@@ -176,6 +297,10 @@ $(document).ready(function() {
   newActivity();
   deleteActivity();
   toggleFinishedActivity();
+  changeToEat();
+  changeToRead();
+  changeToBuy();
+  changeToWatch();
   console.log("test");
 
 })
