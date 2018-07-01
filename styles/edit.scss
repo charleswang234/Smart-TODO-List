@@ -36,18 +36,7 @@ body{
                     background:none;
                 }
             }
-            .back{
-                text-align: center;
-                padding: 0.5rem;
-                background: rgb(138, 189, 223);
-                border-radius: 30px;
-                margin-top: 1rem;
-                opacity:0.7;
-                .rightbutton{
-                    border:none;
-                    background:none;
-                }
-            }
+            
             div{
                 
             .input{
@@ -56,8 +45,23 @@ body{
                 background: transparent;
                 border-bottom: 1px solid rgba(0,0,0,0.4);
                 width: 100%;
-                }
+                }                
             }
         }
     }
+    
+}
+
+.back{
+    text-align: center;
+    padding: 0.5rem;
+    background: rgb(138, 189, 223);
+    border-radius: 30px;
+    margin-top: 1rem;
+    opacity:0.7;
+    .rightbutton{
+        border:none;
+        background:none;
+        }
+        
 }
