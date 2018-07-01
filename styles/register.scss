@@ -50,3 +50,17 @@ body{
     }
 }
 }
+
+.back{
+    text-align: center;
+    padding: 0.5rem;
+    background: rgb(138, 189, 223);
+    border-radius: 30px;
+    margin-top: 1rem;
+    opacity:0.7;
+    .rightbutton{
+        border:none;
+        background:none;
+        }
+        
+}

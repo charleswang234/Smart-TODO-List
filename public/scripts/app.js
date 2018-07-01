@@ -352,7 +352,15 @@ $(function() {
   var backgrounds = new Array(
   'url("images/lupoing.jpg")',
   'url("images/barrika.jpg")',
-  'url("images/Itanki.jpg")',
+  'url("images/bardenas.jpg")',
+  'url("images/canyon.jpg")',
+  'url("images/catalina.jpg")',
+  'url("images/dutch.jpg")',
+  'url("images/gulf.jpg")',
+  'url("images/medven.jpg")',
+  'url("images/namib.jpg")',
+  'url("images/norway.jpg")',
+  'url("images/stelvio.jpg")',
   );
   var current = 0;
 
