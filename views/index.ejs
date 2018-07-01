@@ -16,6 +16,9 @@
   <!-- APP JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
 
+ <!--  Popupjs ********************************-->
+  <script type="text/javascript">"/scripts/popupAction.js"</script>
+
 
   <!-- bootstrap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -23,6 +26,7 @@
 
   <!-- momentjs -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+
 </head>
 
 <body>
@@ -64,6 +68,7 @@
             <a class="dropdown-item" href="#">
               <form action="/home/edit" method="GET">
                 <input class="rightbutton" type="submit" value="Edit Profile">
+              </form>
               </a>
             </div>
           </li>
@@ -79,6 +84,15 @@
         </script>
       </span>
       <span class="weather">21.C</span>
+        <fieldset style="width: 50%">
+          <legend>Do you mean?</legend>
+          <form>
+            <button id="chooseMovie" type="submit">Movie</button>
+            <button id="chooseBuy" type="submit">Buy</button>
+            <button id="chooseRead" type="submit">Read</button>
+            <button id="chooseEat" type="submit">Eat</button>
+          </form>
+        </fieldset>
       <div class="row">
         <div class="col-3">
           <div class="column">
