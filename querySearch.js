@@ -16,16 +16,14 @@ const yelp = require('yelp-fusion');
 const yelpClient = yelp.client(yelpKey);
 
 
-
 function walmartSearch(searchTerm) {
     walmart.search(searchTerm)
     .then(function(item) {
     var walmartArr = []
-    console.log(item.items.forEach(function (i){
+    item.items.forEach(function (i){
         walmartArr.push(i.name)
         
         })
-    )
     console.log(walmartArr);
   })
 };
@@ -38,9 +36,9 @@ function yelpSearch(searchTerm) {
     location: 'toronto, on'
   }).then(response => {
     var yelpArr = []
-    console.log(response.jsonBody.businesses.forEach(function (i){
+    response.jsonBody.businesses.forEach(function (i){
         yelpArr.push(i.name)
-    }));
+    });
     console.log(yelpArr)
   }).catch(e => {
     console.log(e);
@@ -50,15 +48,15 @@ function yelpSearch(searchTerm) {
 
 console.log(yelpSearch('lighthouse'))
 
-function query(searchTerm){
-    var searchURL = 'http://www.wolframalpha.com/queryrecognizer/query.jsp?appid=DEMO&mode=Default&i='+ searchTerm +'&output=json'
-    request(searchURL, function(err, result, body){
-        var info = JSON.parse(body);
-        console.log(info.query[0].domain);
-        console.log(info.query[0].resultsignificance);
-    })
+// function query(searchTerm){
+//     var searchURL = 'http://www.wolframalpha.com/queryrecognizer/query.jsp?appid=DEMO&mode=Default&i='+ searchTerm +'&output=json'
+//     request(searchURL, function(err, result, body){
+//         var info = JSON.parse(body);
+//         console.log(info.query[0].domain);
+//         console.log(info.query[0].resultsignificance);
+//     })
     
-}
+// }
 
 // console.log(query("books"));
 
@@ -91,3 +89,40 @@ function movieSearch(searchTerm){
 }
 
 console.log(movieSearch('test'));
+
+var returnRelevant = new Promise(function(resolve, reject) {
+
+})
+
+// function returnRelevant (searchTerm){
+//     return new Promise((resolve, reject) => {
+//     walmartSearch(searchTerm)
+//     .then(function(response){
+//         var result = [];
+//         response.forEach(function (i){
+//             result.push(i)
+//         })
+//     });
+// })
+
+
+//     console.log(results);
+// }
+
+
+// function searchResults(searchTerm){
+//     console.log(searchTerm," is the query")
+//     var resultsArr = []
+//     return searchTerm
+// }
+
+// var promise1 = walmartSearch("test");
+// var promise2 = 42;
+// var promise3 = new Promise(function(resolve, reject) {
+//   setTimeout(resolve, 100, 'foo');
+// });
+
+// Promise.all([promise1, promise2, promise3]).then(function(values) {
+//   console.log(values);
+// });
+// expected output: Array [3, 42, "foo"]
