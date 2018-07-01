@@ -30,7 +30,9 @@
     "omdb": "^0.8.0",
     "pg": "^6.0.2",
     "walmart": "0.0.4",
-    "yelp-fusion": "^2.0.3"
+    "yelp-fusion": "^2.0.3",
+    "pg": "^6.0.2",
+    "request": "^2.87.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.5",

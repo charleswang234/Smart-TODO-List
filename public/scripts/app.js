@@ -307,6 +307,28 @@ function renderActivities (activities){
   })
 }
 
+function popupAction (){
+  $(document).on('click', '#chooseMovie', function(){
+    alert("this is movie time");
+    randomInt = 3;
+  })
+  $(document).on('click', '#chooseBuy', function(){
+    alert("this shopping");
+    randomInt = 1;
+  })
+  $(document).on('click', '#chooseRead', function(){
+    alert("this reading books");
+    randomInt = 2;
+  })
+  $(document).on('click', '#chooseEat', function(){
+    alert("this food time");
+    randomInt = 4;
+  })
+}
+
+
+
+
 $(document).ready(function() {
   loadActivities();
   console.log("did it get here?");
@@ -319,6 +341,7 @@ $(document).ready(function() {
   changeCategory('.buyChange', '/activity/tobuy');
   changeCategory('.watchChange', '/activity/towatch');
   console.log("test");
+
 
 })
 
