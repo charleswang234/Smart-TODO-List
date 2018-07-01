@@ -6,27 +6,27 @@
 
 function dropDown () {
   theDropDown = `<a class="fas fa-bars" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon">
 
-              </span>
-            </button>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item eatChange" href="#">
-              <p>Eat</p>
-            </a>
-            <!-- these will have to be forms to have POST methods -->
-            <a class="dropdown-item readChange href="#">
-              <p>Read</p>
-            </a>
-            <a class="dropdown-item buyChange" href="#">
-              <p>Buy</p>
-            </a>
-            <a class="dropdown-item watchChange" href="#">
-              <p>Watch</p>
-            </a>
-          </div>`;
+  </span>
+  </button>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+  <a class="dropdown-item eatChange" href="#">
+  <p>Eat</p>
+  </a>
+  <!-- these will have to be forms to have POST methods -->
+  <a class="dropdown-item readChange href="#">
+  <p>Read</p>
+  </a>
+  <a class="dropdown-item buyChange" href="#">
+  <p>Buy</p>
+  </a>
+  <a class="dropdown-item watchChange" href="#">
+  <p>Watch</p>
+  </a>
+  </div>`;
   return theDropDown;
 }
 
@@ -213,10 +213,14 @@ function toggleFinishedActivity() {
   })
 }
 
-function changeToEat() {
-  $(document).on('click', '.eatChange', function() {
+
+
+
+
+function changeCategory(categoryClass, theUrl) {
+  $(document).on('click', categoryClass, function() {
     $.ajax({
-      url: "/activity/toeat",
+      url: theUrl,
       type: 'POST',
       // contentType: "application/json",
       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
@@ -226,46 +230,59 @@ function changeToEat() {
   })
 }
 
+// function changeToEat() {
+//   $(document).on('click', '.eatChange', function() {
+//     $.ajax({
+//       url: "/activity/toeat",
+//       type: 'POST',
+//       // contentType: "application/json",
+//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+//     }).then(function (jsonActivities) {
+//       loadActivities();
+//     })
+//   })
+// }
 
-// read buy watch
-function changeToRead() {
-  $(document).on('click', '.readChange', function() {
-    $.ajax({
-      url: "/activity/toread",
-      type: 'POST',
-      // contentType: "application/json",
-      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-    }).then(function (jsonActivities) {
-      loadActivities();
-    })
-  })
-}
 
-function changeToBuy() {
-  $(document).on('click', '.buyChange', function() {
-    $.ajax({
-      url: "/activity/tobuy",
-      type: 'POST',
-      // contentType: "application/json",
-      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-    }).then(function (jsonActivities) {
-      loadActivities();
-    })
-  })
-}
+// // read buy watch
+// function changeToRead() {
+//   $(document).on('click', '.readChange', function() {
+//     $.ajax({
+//       url: "/activity/toread",
+//       type: 'POST',
+//       // contentType: "application/json",
+//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+//     }).then(function (jsonActivities) {
+//       loadActivities();
+//     })
+//   })
+// }
 
-function changeToWatch() {
-  $(document).on('click', '.watchChange', function() {
-    $.ajax({
-      url: "/activity/towatch",
-      type: 'POST',
-      // contentType: "application/json",
-      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-    }).then(function (jsonActivities) {
-      loadActivities();
-    })
-  })
-}
+// function changeToBuy() {
+//   $(document).on('click', '.buyChange', function() {
+//     $.ajax({
+//       url: "/activity/tobuy",
+//       type: 'POST',
+//       // contentType: "application/json",
+//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+//     }).then(function (jsonActivities) {
+//       loadActivities();
+//     })
+//   })
+// }
+
+// function changeToWatch() {
+//   $(document).on('click', '.watchChange', function() {
+//     $.ajax({
+//       url: "/activity/towatch",
+//       type: 'POST',
+//       // contentType: "application/json",
+//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+//     }).then(function (jsonActivities) {
+//       loadActivities();
+//     })
+//   })
+// }
 
 
 
@@ -297,10 +314,10 @@ $(document).ready(function() {
   newActivity();
   deleteActivity();
   toggleFinishedActivity();
-  changeToEat();
-  changeToRead();
-  changeToBuy();
-  changeToWatch();
+  changeCategory('.eatChange', '/activity/toeat');
+  changeCategory('.readChange', '/activity/toread');
+  changeCategory('.buyChange', '/activity/tobuy');
+  changeCategory('.watchChange', '/activity/towatch');
   console.log("test");
 
 })
