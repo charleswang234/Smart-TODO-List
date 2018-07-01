@@ -36,7 +36,7 @@ function createBuy (input) {
   $('<i>').addClass('far fa-check-circle toggleFinished')
   .appendTo($contentBuy);
   const $realText = $('<span>');
-  $('<div>').addClass('buyactivity').appendTo($contentBuy)
+
   $realText.addClass('decorateTask').text(input.activity).appendTo($contentBuy);
   if (input.completed) {
     $realText.css("text-decoration", "line-through");
@@ -350,17 +350,17 @@ $(document).ready(function() {
 $(function() {
   var body = $('#body');
   var backgrounds = new Array(
-  'url("images/lupoing.jpg")',
-  'url("images/barrika.jpg")',
-  'url("images/bardenas.jpg")',
-  'url("images/canyon.jpg")',
-  'url("images/catalina.jpg")',
-  'url("images/dutch.jpg")',
-  'url("images/gulf.jpg")',
-  'url("images/medven.jpg")',
-  'url("images/namib.jpg")',
-  'url("images/norway.jpg")',
-  'url("images/stelvio.jpg")',
+  'url("images/lupoing.jpg") no-repeat fixed',
+  'url("images/barrika.jpg") no-repeat fixed',
+  'url("images/bardenas.jpg") no-repeat fixed',
+  'url("images/canyon.jpg") no-repeat fixed',
+  'url("images/catalina.jpg") no-repeat fixed',
+  'url("images/dutch.jpg") no-repeat fixed',
+  'url("images/gulf.jpg") no-repeat fixed',
+  'url("images/medven.jpg") no-repeat fixed',
+  'url("images/namib.jpg") no-repeat fixed',
+  'url("images/norway.jpg") no-repeat fixed',
+  'url("images/stelvio.jpg") no-repeat fixed',
   );
   var current = 0;
 
@@ -369,6 +369,6 @@ $(function() {
     setTimeout(nextBackground, 10000);
   }
   setTimeout(nextBackground, 10000);
-  body.css('background', backgrounds[0]);
+  body.css('background', backgrounds[1]);
 });
 

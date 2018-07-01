@@ -20,7 +20,7 @@
 </head>
 <body id='body'>
   <nav class="navbar navbar-expand-sm">
-    <a class="navbar-brand" href="#"><i class="fab fa-nintendo-switch"></i>
+    <a class="navbar-brand" href="#"><i class="fas fa-child"></i>
     </a>
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,6 @@
               <!-- this is where activity is writen in -->
               <input class="form-control mr-sm-2" name="inputActivity" type="search" placeholder="What do you want to do?" aformat_indent_decreaseria-label="Do">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Do!</button>
-              <p id ="noInputChar">No task entered</p>
             </form>
           </nav>
         </li>
@@ -64,6 +63,7 @@
       </ul>
     </div>
   </nav>
+  <p id ="noInputChar">No task entered</p>
   <section>
     <span id="date">
       <script>
@@ -71,7 +71,7 @@
         document.getElementById("date").innerHTML = d;
       </script>
     </span>
-    <span class="weather">21.C</span>
+    <span class="weather"></span>
     <div class="row">
       <div class="col-3">
         <div class="column">

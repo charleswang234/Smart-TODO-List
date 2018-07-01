@@ -1,14 +1,11 @@
 
 #body{
   background-size: cover;
-  // background:url("images/lupoing.jpg") no-repeat top center fixed;
   transition:2s all cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 body {
   padding: 2rem 6rem 2rem 6rem!important;
   font-family: 'Open Sans', sans-serif!important;
-  //background:url("images/lupoing.jpg") no-repeat top center fixed;
-  //background-color: #107896!important;
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -21,9 +18,10 @@ body {
     margin: 2rem;
   }
   nav {
-    .fa-nintendo-switch:before {
+    .fa-child:before {
       color:white;
-      padding-left: 1.1rem
+      padding-left: 1.1rem;
+      font-size: 3rem;
     }
     .navbar-nav {
       display: flex;
@@ -125,6 +123,12 @@ section {
       }
     }
   }
+}
+
+#noInputChar{
+  display:none;
+  text-align: center;
+  color:rgb(255, 46, 46);
 }
 
 @media (max-width: 1200px) {
