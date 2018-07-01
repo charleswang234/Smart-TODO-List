@@ -36,7 +36,8 @@ function dropDown () {
 function createBuy (input) {
   // creates a paragraph
   var $contentBuy = $('<p>').addClass('contentBuy');
-
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  .appendTo($contentBuy);
   const $realText = $('<span>');
 
   $realText.addClass('decorateTask').text(input.activity).appendTo($contentBuy);
@@ -50,8 +51,7 @@ function createBuy (input) {
 
   // all the symbols and drop down menu
   $(dropDown()).appendTo($span);
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($span);
+
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($span);
@@ -64,7 +64,8 @@ function createBuy (input) {
 function createWatch (input) {
   // creates a paragraph
   var $contentWatch = $('<p>').addClass('contentWatch');
-
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  .appendTo($contentWatch);
   const $realText = $('<span>');
 
   $realText.addClass('decorateTask').text(input.activity).appendTo($contentWatch);
@@ -78,8 +79,7 @@ function createWatch (input) {
 
   // all the symbols and drop down menu
   $(dropDown()).appendTo($span);
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($span);
+
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($span);
@@ -92,7 +92,8 @@ function createWatch (input) {
 function createRead (input) {
   // creates a paragraph
   var $contentRead = $('<p>').addClass('contentRead');
-
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  .appendTo($contentRead);
   const $realText = $('<span>');
 
   $realText.addClass('decorateTask').text(input.activity).appendTo($contentRead);
@@ -106,8 +107,7 @@ function createRead (input) {
 
   // all the symbols and drop down menu
   $(dropDown()).appendTo($span);
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($span);
+
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($span);
@@ -120,7 +120,8 @@ function createRead (input) {
 function createEat (input) {
   // creates a paragraph
   var $contentEat = $('<p>').addClass('contentEat');
-
+  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
+  .appendTo($contentEat);
   const $realText = $('<span>');
 
   $realText.addClass('decorateTask').text(input.activity).appendTo($contentEat);
@@ -134,8 +135,7 @@ function createEat (input) {
 
   // all the symbols and drop down menu
   $(dropDown()).appendTo($span);
-  $('<i>').addClass('fas fa-clipboard-check toggleFinished')
-  .appendTo($span);
+
 
   $('<i>').addClass('fas fa-trash-alt deleteTask')
   .appendTo($span);
@@ -186,7 +186,7 @@ function deleteActivity() {
     $.ajax({
      url: "/activity/delete",
      type: 'POST',
-     data: $.param({task: $(this).parent().parent().children(":first").text()})
+     data: $.param({task: $(this).parent().parent().children(":nth-child(2)").text()})
    }).then(function (jsonActivities) {
     loadActivities();
   })
@@ -205,7 +205,7 @@ function toggleFinishedActivity() {
     $.ajax({
       url: "/activity/completed",
       type: 'POST',
-      data: $.param({task: $(this).parent().parent().children(":first").text()})
+      data: $.param({task: $(this).parent().children(":nth-child(2)").text()})
     }).then(function (jsonActivities) {
       console.log("hi");
       loadActivities();
@@ -223,7 +223,7 @@ function changeCategory(categoryClass, theUrl) {
       url: theUrl,
       type: 'POST',
       // contentType: "application/json",
-      data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
+      data: $.param({task: $(this).parent().parent().parent().children(":nth-child(2)").text()})
     }).then(function (jsonActivities) {
       loadActivities();
     })

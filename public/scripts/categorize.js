@@ -6,7 +6,8 @@ module.exports = {
 var shopArr = ['buy', 'shop', 'acquire', 'purchase', 'obtain', 'stock up']
 var readArr = ['study', 'scan', 'read', 'perusal', 'browse']
 var movieArr = ['watch', 'see', 'movie', 'theater', 'cinema']
-var eatArr = ['dine', 'lunch', 'eat', 'dinner', 'brunch', 'breakfast', 'snack','teatime', 'cafe']
+var eatArr = ['dine', 'lunch', 'eat', 'dinner', 'brunch', 'breakfast', 'snack','teatime', 'cafe',
+              ,'']
 
 function filterShop(query) {
   return shopArr.filter( function(el){
