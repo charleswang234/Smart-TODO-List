@@ -3,3 +3,6 @@ public/styles
 .env
 *.log
 *.sqlite3
+
+querySearch.js
+routes/weather.js
