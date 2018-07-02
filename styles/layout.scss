@@ -31,7 +31,7 @@ body {
     .nav-link.user {
       padding-top: 1rem;
       color: white!important;
-    }    
+    }
     .fa-bars:before {
       content: "\f0c9";
       font-size: 1.5rem;
@@ -53,11 +53,11 @@ body {
       padding-top: 1rem;
       padding-right: 1rem;
     }
-    .rightbutton { 
+    .rightbutton {
       background: none;
       border: none;
       color: black;
-      cursor: pointer; 
+      cursor: pointer;
     }
     .btn.btn-outline-success.my-2.my-sm-0 {
       color: white;
@@ -80,7 +80,7 @@ body {
 
 section {
     margin: 1rem 2rem 2rem 2rem;
-  
+
   .row{
     .col-3{
       padding: 0px;
@@ -124,7 +124,7 @@ section {
         .fa-trash-alt:hover{
           opacity: 0.5;
         }
-        
+
       }
       }
       .activity{
@@ -146,7 +146,7 @@ section {
       }
       section {
         margin: 1rem 2rem 2rem 2rem;
-      
+
       .row{
         .col-3{
           padding: 0px;
@@ -161,7 +161,7 @@ section {
             padding: 0.5rem 0.5rem 0.5rem 0.5rem;
             display: flex;
             justify-content: space-between;
-          }  
+          }
         }
       }
     }

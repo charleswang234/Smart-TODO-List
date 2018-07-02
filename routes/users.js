@@ -4,48 +4,29 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt  = require('bcryptjs')
 
-
 // checks if a string is empty
 function emptyString(string) {
   return string === "";
 }
-
 
 // determines whether or not the passwords are equal
 function passwordEqual(password, verify_password) {
   return password === verify_password;
 }
 
-
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-
-
-
 module.exports = (knex) => {
 
-//   function fullName(req) {
-//   knex('users')
-//   .where({id: req.session.user_id})
-//   .select('first_name', 'last_name')
-//   .then((completeName) => {
-//       const name = {}; // selects the first_name and last_name to display in placeholder for edit
-//       // console.log(completeName);
-//       name.first_name = completeName[0].first_name;
-//       name.last_name = completeName[0].last_name;
-//       return name;
-//     })
-// }
-
-router.get("/", (req, res) => {
-  if(req.session.user_id) {
-    res.redirect("/home");
-    return;
-  }
-  res.redirect("/login");
-});
+  router.get("/", (req, res) => {
+    if(req.session.user_id) {
+      res.redirect("/home");
+      return;
+    }
+    res.redirect("/login");
+  });
 
 
 // home page that allows logged in users to add and remove their items on the to do list
@@ -54,7 +35,6 @@ router.get("/home", (req, res) => {
     res.redirect("/login");
     return
   }
-
   knex('users')
   .where({id: req.session.user_id})
   .select('first_name')
@@ -74,10 +54,9 @@ router.post("/home", (req, res) => {
   res.redirect('/home');
 });
 
-
-   // renders the edit page
-   router.get("/home/edit", (req, res) => {
-    const errors = [];
+// renders the edit page
+router.get("/home/edit", (req, res) => {
+  const errors = [];
     if (!req.session.user_id) { // user not logged in
       res.redirect("/login");
       return;
@@ -99,9 +78,9 @@ router.post("/home", (req, res) => {
 
 
 
-   // changing user data
-   router.post("/home/edit", (req, res) => {
-    const errors = [];
+// changing user data
+router.post("/home/edit", (req, res) => {
+  const errors = [];
     // If no data is going to be changed
     if (emptyString(req.body.first_name) && emptyString(req.body.last_name) &&
       emptyString(req.body.password) && emptyString(req.body.verify_password)) {
@@ -118,8 +97,6 @@ router.post("/home", (req, res) => {
       res.render("edit", {'errors': errors, 'name': name});
       return;
     })
-
-
   }
 
   knex('users')
@@ -136,15 +113,11 @@ router.post("/home", (req, res) => {
       .select('first_name', 'last_name')
       .then((completeName) => {
       const name = {}; // selects the first_name and last_name to display in placeholder for edit
-      // console.log(completeName);
       name.first_name = completeName[0].first_name;
       name.last_name = completeName[0].last_name;
       res.render("edit", {'errors': errors, 'name': name});
       return;
     })
-      // console.log(result);
-      // res.status(400).json({ error: 'incorrect old password'});
-
     } else {
       if (! passwordEqual(req.body.password, req.body.verify_password)) {
         errors.push("New password don't match");
@@ -153,13 +126,11 @@ router.post("/home", (req, res) => {
         .select('first_name', 'last_name')
         .then((completeName) => {
       const name = {}; // selects the first_name and last_name to display in placeholder for edit
-      // console.log(completeName);
       name.first_name = completeName[0].first_name;
       name.last_name = completeName[0].last_name;
       res.render("edit", {'errors': errors, 'name': name});
       return;
     })
-        // res.status(400).json({ error: "new passwords don't match"});
       } else if (!emptyString(req.body.password)) {
         newUserData.password = hashing(req.body.password);
       }
@@ -177,18 +148,9 @@ router.post("/home", (req, res) => {
         res.redirect("/home");
         return;
       })
-
-
     }
-
   });
-    // There is data that wants to be changed but password is not equal
-    // if (emptyString(req.body_))
-
-  });
-
-
-
+});
 
   // login page
   router.get("/login", (req, res) => {
@@ -200,7 +162,6 @@ router.post("/home", (req, res) => {
     res.render("login", {'errors': errors});
   });
 
-
   // logging in
   router.post("/login", (req, res) => {
     const errors = [];
@@ -209,10 +170,9 @@ router.post("/home", (req, res) => {
     .select('*')
     .then(function(result){
       console.log(result)
-      if (result.length === 0 ){              // error handling
+      if (result.length === 0 ){
         errors.push('Invalid Credentials');
         res.render('login', {'errors': errors});
-        // res.status(400).json({ error: 'Invalid email or password.'});
         return;
       }
 
@@ -224,12 +184,9 @@ router.post("/home", (req, res) => {
       }
       errors.push('Invalid Credentials');
       res.render('login', {'errors': errors});
-      // res.status(400).json({ error: 'Invalid email or password.'});
       return;
-
     })
     .catch(function(error) {
-      console.log(error);
     })
   });
 
@@ -256,11 +213,6 @@ router.post("/home", (req, res) => {
     .select('*')
     .where({ email: req.body.email })
     .then( function(result){
-      // one of them is empty (missing info)
-      // check email exists
-      // check if passwords are equal
-
-      // if one section is empty
       if (emptyString(req.body.first_name) || emptyString(req.body.last_name)
         || emptyString(req.body.password) || emptyString(req.body.email)
         || emptyString(req.body.verify_password)) {
@@ -275,7 +227,6 @@ router.post("/home", (req, res) => {
         res.render("register", {'errors': errors});
         return;
       }
-
 
       if (result.length === 0 ){ // error handling (if one field is empty, password not equal)
         const firstName = capitalizeFirstLetter(req.body.first_name);
@@ -302,7 +253,6 @@ router.post("/home", (req, res) => {
         return;
       }
         //error email already exists
-
         errors.push("Email already exists");
         res.render("register", {'errors': errors});
         return;
@@ -314,8 +264,6 @@ router.post("/home", (req, res) => {
     req.session = null;
     res.redirect("/login");
   });
-
-  //make sure front end event checks for empty entry for forms
 
   return router;
 }
