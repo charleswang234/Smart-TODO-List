@@ -4,9 +4,9 @@ TO-DO List is web app that autocategorize user's task into different categories 
 
 ## Final Product
 
-!["Home Page"]()
-!["Login Page"]()
-!["Adding Task"]()
+!["Home Page"](https://github.com/charleswang234/Smart-TODO-List/blob/master/public/images/Homepage.png)
+!["Login Page"](https://github.com/charleswang234/Smart-TODO-List/blob/master/public/images/Login-page.png)
+!["Adding Task"](https://github.com/charleswang234/Smart-TODO-List/blob/master/public/images/Registration.png)
 
 ## Getting Started
 
