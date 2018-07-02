@@ -37,6 +37,9 @@ body {
       font-size: 1.5rem;
       color: white;
     }
+    .fa-bars:hover {
+      opacity: 0.5
+    }
 
     .form-control.mr-sm-2{
       width: 210px;
@@ -95,6 +98,9 @@ section {
         .fa-check-circle{
           padding-top: 4px;
         }
+        .fa-check-circle:hover{
+          opacity: 0.5;
+        }
         .decorateTask{
           padding-left:0.5rem;
           width: 80%
@@ -109,8 +115,14 @@ section {
           padding-top: 3px;
           color: white;
         }
+        .fa-caret-square-down:hover{
+          opacity: 0.5;
+        }
         .fa-trash-alt{
           padding-top: 3px;
+        }
+        .fa-trash-alt:hover{
+          opacity: 0.5;
         }
         
       }
@@ -130,6 +142,7 @@ section {
 @media (max-width: 1200px) {
       body {
         padding: 2rem 0.5rem 2rem .5rem!important;
+        transition:none;
       }
       section {
         margin: 1rem 2rem 2rem 2rem;
