@@ -28,7 +28,7 @@ function walmartSearch(searchTerm) {
   })
 };
 
-console.log(walmartSearch('harrypotter'));
+// console.log(walmartSearch('harrypotter'));
 
 function yelpSearch(searchTerm) {
     yelpClient.search({
@@ -46,7 +46,7 @@ function yelpSearch(searchTerm) {
 
 }
 
-console.log(yelpSearch('lighthouse'))
+// console.log(yelpSearch('lighthouse'))
 
 // function query(searchTerm){
 //     var searchURL = 'http://www.wolframalpha.com/queryrecognizer/query.jsp?appid=DEMO&mode=Default&i='+ searchTerm +'&output=json'
@@ -74,7 +74,7 @@ function bookSearch(searchTerm){
     })
 }
    
-console.log(bookSearch("harry potter"));
+// console.log(bookSearch("harry potter"));
 
 function movieSearch(searchTerm){
     var moviesURL = 'https://api.themoviedb.org/3/search/movie?query='+ searchTerm +'&api_key='+ movieKey + '&language=en-US&page=1&include_adult=false'
@@ -88,11 +88,26 @@ function movieSearch(searchTerm){
     })
 }
 
-console.log(movieSearch('test'));
+// console.log(movieSearch('test'));
 
-var returnRelevant = new Promise(function(resolve, reject) {
+function getWeather() {
+    var temp2 ='';
+      var url = 'http://api.openweathermap.org/data/2.5/weather?q=toronto&APPID=' +'33880363f19f1dfe20b7149702d5b9d4';
+      request(url, function (err, result, body){
+        var data = JSON.parse(body);
+        var temp = data.weather.main;
+        temp2 = temp;
+        console.log(temp2);
+      })
+    }
 
-})
+    console.log(getWeather());
+
+
+
+// weather.then((success)=>{
+//     console.log(success, 'temp');
+// })
 
 // function returnRelevant (searchTerm){
 //     return new Promise((resolve, reject) => {
