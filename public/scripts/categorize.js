@@ -4,7 +4,7 @@ const request = require('request');
 // array of key words:
 var shopArr = ['buy', 'shop', 'acquire', 'purchase', 'obtain', 'stock up']
 var readArr = ['study', 'scan', 'read', 'perusal', 'browse']
-var movieArr = ['watch', 'see', 'movie', 'theater', 'cinema']
+var movieArr = ['watch', 'see', 'movie', 'theater', 'cinema', 'drama', 'opera']
 var eatArr = ['dine', 'lunch', 'eat', 'dinner', 'brunch', 'breakfast', 'snack','teatime', 'cafe']
 
 function filterShop(query) {

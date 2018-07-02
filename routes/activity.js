@@ -81,20 +81,20 @@ module.exports = (knex) => {
       getCategory(req.body.inputActivity);
       setTimeout(function() {
         resolve(test2);
-      }, 2000);
+      }, 500);
     })
 
     //promise fulfilled
     getNumber.then((success) => {
       console.log(success,'in post')
       let number = null
-      if (success == 'movies') {
+      if (success === 'movies') {
         number = 3;
       }
-      else if (success == 'food'){
+      else if (success === 'food'){
         number = 4;
       }
-      else if (success == 'books'){
+      else if (success === 'books' || success === 'a fictional character'){
         number = 2;
       }
       else {
