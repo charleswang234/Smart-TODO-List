@@ -1,16 +1,13 @@
 "use strict"
+
 const express = require('express');
 const request = require('request');
 const router = express.Router();
-const categorize = require("../public/scripts/categorize.js")
-
-
-
-function randomInteger(max) {
-  return Math.floor(Math.random() * Math.floor(max)) + 1;
-}
+const categorize = require("../public/scripts/categorize.js");
 
 module.exports = (knex) => {
+
+  // allow user to change the category of their task
   function changeTask(category, req, res) {
     knex('tasks')
     .where({"user_id": req.session.user_id})
@@ -27,21 +24,13 @@ module.exports = (knex) => {
         .andWhere({"activity":req.body.task})
         .update({"category_id": category})
         .then(function(activity) {
-          console.log('changed');
           res.status(201).send();
         })
       }
     })
   }
 
-
-
   router.get("/", (req, res) => {
-    // knex.select('*')
-    // .from('tasks')
-    // .then((results) => {
-    //   res.json(results);
-    // })
     if(req.session.user_id) {
      knex("tasks")
      .join("categories", "tasks.category_id", "=", "categories.id")
@@ -50,7 +39,6 @@ module.exports = (knex) => {
      .select("tasks.id", "tasks.user_id", "tasks.activity", "categories.category", "tasks.completed")
      .orderBy("tasks.id")
      .then((results) => {
-      // console.log(results);
       res.json(results);
     })
      .catch(function(error) {
@@ -60,31 +48,24 @@ module.exports = (knex) => {
    }
  })
 
-
   router.post("/", function(req, res) {
-    console.log("is it here?", req.body.inputActivity)
-    console.log("session",req.session.user_id)
-  // let activity = ('inputActivity').val();
-  if (!req.body.inputActivity) { // error handling if empty
-    res.status(400).json({ error: 'invalid request: no data in POST body'});
-    return;
-  }
-  else {
-
-    let catID = categorize.checkQuery(req.body.inputActivity)
-    if (catID){
-      knex("tasks")
-      .insert({'activity': req.body.inputActivity,
-        'completed': false,
-        'user_id': req.session.user_id,
-        'category_id': catID
-      })
-      .then(function(){
-        console.log("insert done")
-        res.status(201).send();
-        return;
-        // res.redirect("/home")
-      })} else {
+    if (!req.body.inputActivity) {
+      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      return;
+    }
+    else {
+      let catID = categorize.checkQuery(req.body.inputActivity)
+      if (catID){
+        knex("tasks")
+        .insert({'activity': req.body.inputActivity,
+          'completed': false,
+          'user_id': req.session.user_id,
+          'category_id': catID
+        })
+        .then(function(){
+          res.status(201).send();
+          return;
+        })} else {
 
     //have a promise that allow testing before the data is added
     let getNumber = new Promise (function(resolve, reject){
@@ -94,7 +75,6 @@ module.exports = (knex) => {
         request(url, function (err, result, body){
           var data = JSON.parse(body);
           var test = data.query[0].domain;
-          console.log(test);
           test2 = test;
         })
       }
@@ -109,25 +89,20 @@ module.exports = (knex) => {
       console.log(success,'in post')
       let number = null
       if (success == 'movies') {
-        console.log("is the movie?")
         number = 3;
       }
       else if (success == 'food'){
-        console.log("is this a food?")
         number = 4;
       }
       else if (success == 'books'){
-        console.log("is this a book?")
         number = 2;
       }
       else {
-        console.log('trigger event')
         number = null;
       }
-      console.log('category ID is: ', number)
       return number;
 
-    }).then( (categoryID) => {
+    }).then((categoryID) => {
       if (!categoryID){
        knex("tasks")
        .insert({'activity': req.body.inputActivity,
@@ -136,7 +111,6 @@ module.exports = (knex) => {
         'category_id': 1
       })
        .then(function(){
-        console.log("insert done")
         res.status(201).send();
         return;
       })
@@ -149,7 +123,6 @@ module.exports = (knex) => {
         'category_id': categoryID
       })
       .then(function(){
-        console.log("insert done")
         res.status(201).send();
         return;
       })
@@ -157,24 +130,20 @@ module.exports = (knex) => {
   })
   }
 }
-
 });
 
-
-  // delete a task (url is /activity/delete)
+  // delete a task
   router.post("/delete", function(req, res) {
-    // console.log(req.body.task);
     knex('tasks')
     .where({"user_id": req.session.user_id})
     .andWhere({"activity": req.body.task})
     .del()
     .then(function () {
-      console.log("delete done");
       res.status(201).send();
     })
   });
 
-
+  // complete a task
   router.post("/completed", function(req, res) {
     console.log(req.body);
     knex('tasks')
@@ -182,59 +151,30 @@ module.exports = (knex) => {
     .andWhere({"activity": req.body.task})
     .update({completed: true})
     .then(function () {
-      console.log("completed");
       res.status(201).send();
     })
   });
-  // res.redirect("/login");
-
 
   // change section to the eat section
   router.post("/toeat", function(req, res) {
-    console.log(req.body);
     changeTask(4, req, res);
   });
 
   // change section to the read section
   router.post("/toread", function(req, res) {
-    console.log(req.body);
     changeTask(2, req, res);
   });
 
 
   // change section to the buy section
   router.post("/tobuy", function(req, res) {
-    console.log(req.body);
     changeTask(1, req, res);
   });
 
   // change section to the watch section
   router.post("/towatch", function(req, res) {
-    console.log(req.body);
     changeTask(3, req, res);
   });
 
   return router;
-
 }
-
-    //   getNumber.then(function(fromResolve){
-      // knex("tasks")
-      // .insert({'activity': req.body.inputActivity,
-      //   'completed': false,
-      //   'user_id': req.session.user_id,
-      //   'category_id': randomInt
-      // })
-      // .then(function(){
-      //   console.log("insert done")
-      //   res.status(201).send();
-      //   // res.redirect("/home")
-      // })
-
-
-
-    // let randomInt = categorize.checkQuery(req.body.inputActivity);
-
-
-
-

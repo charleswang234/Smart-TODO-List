@@ -1,13 +1,11 @@
 
-// function createList() {
-//   $( "#activity-container .eat").append($("<p>").text("hello there"));
-// }
 
 
+// allows user to change the category
 function dropDown () {
   theDropDown = `<a class="far fa-caret-square-down" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   <button hidden class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-   </button>
+  </button>
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
   <a class="dropdown-item eatChange" href="#">
@@ -157,30 +155,31 @@ function loadActivities () {
   })
 };
 
+// allows user to add a new activity without reloading the page
 function newActivity () {
-  $('#addButton').on('submit', function (e){
+  $('#addButton').on('submit', function (){
     event.preventDefault();
     let activity = $('.form-control').val();
     // cosole.log("activity",activity)
 
-    if (activity === '') {
-       $('#noInputChar').fadeIn(300).delay(500).fadeOut();
-      return;
-    }else{
-      console.log("post")
-      $.ajax({
-        url: "/activity",
-        type: 'POST',
-        data: $(this).serialize()
-      }).then (function (jsonActivities) {
-        $('.form-control').val('');
-        loadActivities();
-          // $('.contentBuy').prepend(createBuy([{activity}]));
-        })
-    };
-  })
+    if (activity === '') { // if no text is entered
+     $('#noInputChar').fadeIn(300).delay(500).fadeOut();
+     return;
+   }else{
+    console.log("post")
+    $.ajax({
+      url: "/activity",
+      type: 'POST',
+      data: $(this).serialize()
+    }).then (function (jsonActivities) {
+      $('.form-control').val('');
+      loadActivities();
+    })
+  };
+})
 }
 
+// allows user to delete an activity
 function deleteActivity() {
   $(document).on('click', '.deleteTask', function() {
     $( this ).parent().fadeOut();
@@ -192,15 +191,9 @@ function deleteActivity() {
     loadActivities();
   })
  })
-  // $('.contentRead').on('click', function(event) {
-  //   console.log(this);
-
-  // });
 }
 
-
-//, style: $(this).parent().css()
-
+// allows user to make the task complete
 function toggleFinishedActivity() {
   $(document).on('click', '.toggleFinished', function() {
     $.ajax({
@@ -208,84 +201,23 @@ function toggleFinishedActivity() {
       type: 'POST',
       data: $.param({task: $(this).parent().children(":nth-child(2)").text()})
     }).then(function (jsonActivities) {
-      console.log("hi");
       loadActivities();
     })
   })
 }
 
-
-
-
-
+// allows user to change the category of a task
 function changeCategory(categoryClass, theUrl) {
   $(document).on('click', categoryClass, function() {
     $.ajax({
       url: theUrl,
       type: 'POST',
-      // contentType: "application/json",
       data: $.param({task: $(this).parent().parent().parent().children(":nth-child(2)").text()})
     }).then(function (jsonActivities) {
       loadActivities();
     })
   })
 }
-
-// function changeToEat() {
-//   $(document).on('click', '.eatChange', function() {
-//     $.ajax({
-//       url: "/activity/toeat",
-//       type: 'POST',
-//       // contentType: "application/json",
-//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-//     }).then(function (jsonActivities) {
-//       loadActivities();
-//     })
-//   })
-// }
-
-
-// // read buy watch
-// function changeToRead() {
-//   $(document).on('click', '.readChange', function() {
-//     $.ajax({
-//       url: "/activity/toread",
-//       type: 'POST',
-//       // contentType: "application/json",
-//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-//     }).then(function (jsonActivities) {
-//       loadActivities();
-//     })
-//   })
-// }
-
-// function changeToBuy() {
-//   $(document).on('click', '.buyChange', function() {
-//     $.ajax({
-//       url: "/activity/tobuy",
-//       type: 'POST',
-//       // contentType: "application/json",
-//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-//     }).then(function (jsonActivities) {
-//       loadActivities();
-//     })
-//   })
-// }
-
-// function changeToWatch() {
-//   $(document).on('click', '.watchChange', function() {
-//     $.ajax({
-//       url: "/activity/towatch",
-//       type: 'POST',
-//       // contentType: "application/json",
-//       data: $.param({task: $(this).parent().parent().parent().children(":first").text()})
-//     }).then(function (jsonActivities) {
-//       loadActivities();
-//     })
-//   })
-// }
-
-
 
 /* Renders the activities and places them to specified columns
 */
@@ -294,7 +226,6 @@ function renderActivities (activities){
   $('#readSection').empty();
   $('#buySection').empty();
   $('#watchSection').empty();
-  console.log('*****************************************************');
   activities.forEach(function (activity){
     if(activity.category === "Buy"){
       $('#buySection').prepend(createBuy(activity))
@@ -308,60 +239,42 @@ function renderActivities (activities){
   })
 }
 
-function popupAction (){
-  $(document).on('click', '#chooseMovie', function(){
-    alert("this is movie time");
-    randomInt = 3;
-  })
-  $(document).on('click', '#chooseBuy', function(){
-    alert("this shopping");
-    randomInt = 1;
-  })
-  $(document).on('click', '#chooseRead', function(){
-    alert("this reading books");
-    randomInt = 2;
-  })
-  $(document).on('click', '#chooseEat', function(){
-    alert("this food time");
-    randomInt = 4;
-  })
-}
 
+// function popupAction (){
+//   $(document).on('click', '#chooseMovie', function(){
+//     alert("this is movie time");
+//     randomInt = 3;
+//   })
+//   $(document).on('click', '#chooseBuy', function(){
+//     alert("this shopping");
+//     randomInt = 1;
+//   })
+//   $(document).on('click', '#chooseRead', function(){
+//     alert("this reading books");
+//     randomInt = 2;
+//   })
+//   $(document).on('click', '#chooseEat', function(){
+//     alert("this food time");
+//     randomInt = 4;
+//   })
+// }
 
-
-
-$(document).ready(function() {
-  loadActivities();
-  console.log("did it get here?");
-
-  newActivity();
-  deleteActivity();
-  toggleFinishedActivity();
-  changeCategory('.eatChange', '/activity/toeat');
-  changeCategory('.readChange', '/activity/toread');
-  changeCategory('.buyChange', '/activity/tobuy');
-  changeCategory('.watchChange', '/activity/towatch');
-  console.log("test");
-
-
-})
-
-
+// sets the background of index.ejs
 $(function() {
   var body = $('#body');
   var backgrounds = new Array(
-  'url("images/lupoing.jpg") no-repeat fixed',
-  'url("images/barrika.jpg") no-repeat fixed',
-  'url("images/bardenas.jpg") no-repeat fixed',
-  'url("images/canyon.jpg") no-repeat fixed',
-  'url("images/catalina.jpg") no-repeat fixed',
-  'url("images/dutch.jpg") no-repeat fixed',
-  'url("images/gulf.jpg") no-repeat fixed',
-  'url("images/medven.jpg") no-repeat fixed',
-  'url("images/namib.jpg") no-repeat fixed',
-  'url("images/norway.jpg") no-repeat fixed',
-  'url("images/stelvio.jpg") no-repeat fixed',
-  );
+    'url("images/lupoing.jpg") no-repeat fixed',
+    'url("images/barrika.jpg") no-repeat fixed',
+    'url("images/bardenas.jpg") no-repeat fixed',
+    'url("images/canyon.jpg") no-repeat fixed',
+    'url("images/catalina.jpg") no-repeat fixed',
+    'url("images/dutch.jpg") no-repeat fixed',
+    'url("images/gulf.jpg") no-repeat fixed',
+    'url("images/medven.jpg") no-repeat fixed',
+    'url("images/namib.jpg") no-repeat fixed',
+    'url("images/norway.jpg") no-repeat fixed',
+    'url("images/stelvio.jpg") no-repeat fixed',
+    );
   var current = 0;
 
   function nextBackground() {
@@ -371,4 +284,19 @@ $(function() {
   setTimeout(nextBackground, 10000);
   body.css('background', backgrounds[1]);
 });
+
+
+$(document).ready(function() {
+  loadActivities();
+  newActivity();
+  deleteActivity();
+  toggleFinishedActivity();
+  changeCategory('.eatChange', '/activity/toeat');
+  changeCategory('.readChange', '/activity/toread');
+  changeCategory('.buyChange', '/activity/tobuy');
+  changeCategory('.watchChange', '/activity/towatch');
+})
+
+
+
 
