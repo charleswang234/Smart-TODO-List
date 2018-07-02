@@ -85,10 +85,10 @@ section {
     .col-3{
       padding: 0px;
       .column{
-        border: 2px solid rgba(0,0,0,0.4);
         margin: 1rem;
         min-height: 50vh;
         border-radius: 2px;
+        background-color:rgba(0,0,0,0.3);
       p {
         margin-top: 0;
         margin-bottom: 1rem;
@@ -151,10 +151,10 @@ section {
         .col-3{
           padding: 0px;
           .column{
-            border: 2px solid rgba(0,0,0,0.4);
             margin: 1rem;
             min-height: 50vh;
             border-radius: 2px;
+            background-color: rgba(0, 0, 0, 0.3);
           p {
             margin-top: 0;
             margin-bottom: 1rem;
