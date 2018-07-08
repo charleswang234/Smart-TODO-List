@@ -1,6 +1,6 @@
 # My TODO List
 
-TO-DO List is web app that autocategorize user's task into different categories using an embeded Wolfram API. This app uses JQuery, EJS, CSS, SASS and AJAX in the front-end and Node, SQL, Express in the back-end.
+TO-DO List is web app that autocategorize user's task into different categories using an embedded Wolfram API. This app uses JQuery, EJS, CSS, SASS and AJAX in the front-end and Node, SQL, Express in the back-end.
 
 ## Final Product
 
